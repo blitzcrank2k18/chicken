@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2019 at 02:47 AM
+-- Generation Time: Aug 21, 2019 at 04:07 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -64,12 +64,30 @@ CREATE TABLE `delivery` (
   `coopswocover` int(11) NOT NULL,
   `timeinplant` time NOT NULL,
   `grower_id` int(11) NOT NULL,
-  `timinfarm` time NOT NULL,
+  `timeinfarm` time NOT NULL,
   `loadstart` time NOT NULL,
-  `loadend` time NOT NULL,
+  `loadfinish` time NOT NULL,
   `plateno` varchar(30) NOT NULL,
-  `preparedby` varchar(50) NOT NULL
+  `preparedby` varchar(50) NOT NULL,
+  `delivery_date` date NOT NULL,
+  `gross_weight` decimal(10,2) NOT NULL,
+  `coops_weight` decimal(10,2) NOT NULL,
+  `net_weight` decimal(10,2) NOT NULL,
+  `doa_pcs` int(11) NOT NULL,
+  `doa_weight` decimal(10,2) NOT NULL,
+  `driver` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`delivery_id`, `truck_seal`, `tripno`, `noofcrew`, `timeoutfarm`, `pcshauled`, `houseno`, `farmchecker`, `feed`, `timeweighed`, `alw`, `weigher`, `birdspercoop`, `coopswocover`, `timeinplant`, `grower_id`, `timeinfarm`, `loadstart`, `loadfinish`, `plateno`, `preparedby`, `delivery_date`, `gross_weight`, `coops_weight`, `net_weight`, `doa_pcs`, `doa_weight`, `driver`) VALUES
+(1, '6565', 6, 7, '0000-00-00 00:00:00', 0, 0, '', '0000-00-00 00:00:00', '2019-08-21 03:09:33', '0.00', '', 0, 0, '01:00:00', 0, '01:00:00', '01:00:00', '01:00:00', '111', '', '2019-01-01', '0.00', '0.00', '0.00', 0, '0.00', ''),
+(2, '878', 8, 7, '0000-00-00 00:00:00', 120, 1, 'gretch', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '0.00', 'allen', 8, 5, '01:00:00', 1, '01:00:00', '03:00:00', '02:00:00', '7676', '', '2019-01-01', '0.00', '0.00', '0.00', 0, '0.00', ''),
+(3, '123', 1, 7, '0000-00-00 00:00:00', 10, 12, 'pepay', '2019-08-22 00:00:00', '0000-00-00 00:00:00', '1.50', 'hell', 8, 2, '01:00:00', 1, '01:00:00', '01:30:00', '02:00:00', '233', '', '2020-01-01', '0.00', '2.00', '100.00', 0, '2.00', ''),
+(4, '12', 2, 2, '0000-00-00 00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-01-01', '0.00', '12.00', '2.00', 2, '2.50', ''),
+(5, '12', 2, 2, '0000-00-00 00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-01-01', '0.00', '12.00', '2.00', 2, '2.50', '');
 
 -- --------------------------------------------------------
 
@@ -112,7 +130,9 @@ INSERT INTO `history_log` (`history_log_id`, `user_id`, `action`, `date`) VALUES
 (1, 1, 'has logged in the system at ', '2019-08-18 15:31:04'),
 (2, 1, 'has logged out the system at ', '2019-08-18 21:36:05'),
 (3, 1, 'has logged in the system at ', '2019-08-18 21:36:14'),
-(4, 1, 'has logged in the system at ', '2019-08-20 21:37:55');
+(4, 1, 'has logged in the system at ', '2019-08-20 21:37:55'),
+(5, 1, 'has logged out the system at ', '2019-08-21 08:48:12'),
+(6, 1, 'has logged in the system at ', '2019-08-21 08:55:20');
 
 -- --------------------------------------------------------
 
@@ -124,11 +144,16 @@ CREATE TABLE `live_weight` (
   `live_weight_id` int(11) NOT NULL,
   `weight` decimal(10,2) NOT NULL,
   `coops` int(11) NOT NULL,
-  `delivery_id` int(11) NOT NULL,
-  `total_birds` int(11) NOT NULL,
-  `total_weight` decimal(10,2) NOT NULL,
-  `coops_weight` decimal(10,2) NOT NULL
+  `delivery_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `live_weight`
+--
+
+INSERT INTO `live_weight` (`live_weight_id`, `weight`, `coops`, `delivery_id`) VALUES
+(1, '2.00', 2, 0),
+(2, '5.00', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -146,6 +171,15 @@ CREATE TABLE `loops` (
   `takenguard` varchar(30) NOT NULL,
   `returnguard` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loops`
+--
+
+INSERT INTO `loops` (`loops_id`, `delivery_id`, `looptaken`, `loopreturn`, `takedate`, `returndate`, `takenguard`, `returnguard`) VALUES
+(1, 3, 5, 5, '2019-01-01 00:00:00', '2019-01-01 00:00:00', '', ''),
+(2, 4, 2, 2, '2019-01-01 00:00:00', '2019-01-01 00:00:00', 'len', 'elen'),
+(3, 5, 2, 2, '2019-01-01 00:00:00', '2019-01-01 00:00:00', 'len', 'elen');
 
 -- --------------------------------------------------------
 
@@ -175,7 +209,10 @@ INSERT INTO `pr` (`pr_id`, `cust_id`, `pr_date`) VALUES
 (9, 1, '2019-08-18'),
 (10, 1, '2019-08-18'),
 (11, 1, '2019-08-20'),
-(12, 1, '2019-08-20');
+(12, 1, '2019-08-20'),
+(13, 0, '0000-00-00'),
+(14, 0, '2019-08-21'),
+(15, 0, '2019-08-21');
 
 -- --------------------------------------------------------
 
@@ -307,16 +344,18 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `name`, `username`, `password`) VALUES
-(1, 'Lee Pipez', 'admin', 'a1Bz20ydqelm8m1wql21232f297a57a5a743894a0e4a801fc3'),
-(2, 'Kaye', 'kaye', 'a1Bz20ydqelm8m1wql71e4e5af2c51dabe73732781a9275b30');
+INSERT INTO `user` (`user_id`, `name`, `username`, `password`, `type`) VALUES
+(1, 'Lee Pipez', 'admin', 'a1Bz20ydqelm8m1wql21232f297a57a5a743894a0e4a801fc3', 'user'),
+(2, 'Kaye', 'kaye', 'a1Bz20ydqelm8m1wql71e4e5af2c51dabe73732781a9275b30', 'user'),
+(3, 'Joemz', '', 'a1Bz20ydqelm8m1wql202cb962ac59075b964b07152d234b70', 'guard');
 
 --
 -- Indexes for dumped tables
@@ -413,7 +452,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `delivery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `grower`
 --
@@ -423,22 +462,22 @@ ALTER TABLE `grower`
 -- AUTO_INCREMENT for table `history_log`
 --
 ALTER TABLE `history_log`
-  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `live_weight`
 --
 ALTER TABLE `live_weight`
-  MODIFY `live_weight_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `live_weight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `loops`
 --
 ALTER TABLE `loops`
-  MODIFY `loops_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loops_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pr`
 --
 ALTER TABLE `pr`
-  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `pr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -468,7 +507,7 @@ ALTER TABLE `temp_trans`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

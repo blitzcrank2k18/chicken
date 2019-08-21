@@ -6,6 +6,7 @@ include('../dist/includes/dbcon.php');
 	$name = $_POST['name'];
 	$username = $_POST['username'];
 	$password = $_POST['password'];
+	$type = $_POST['type'];
 	$pass=md5($password);
 	$salt="a1Bz20ydqelm8m1wql";
 	$pass=$salt.$pass;
@@ -22,8 +23,8 @@ include('../dist/includes/dbcon.php');
 		{	
 
 			
-			mysqli_query($con,"INSERT INTO user(name,username,password)
-			VALUES('$name','$username','$pass')")or die(mysqli_error($con));
+			mysqli_query($con,"INSERT INTO user(name,username,password,type)
+			VALUES('$name','$username','$pass','$type')")or die(mysqli_error($con));
 
 			echo "<script type='text/javascript'>alert('Successfully added new user!');</script>";
 			echo "<script>document.location='user.php'</script>";  

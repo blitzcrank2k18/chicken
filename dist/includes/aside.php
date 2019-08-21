@@ -33,6 +33,19 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
+            <span>Delivery</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="delivery.php"><i class="fa fa-plus"></i> Add Delivery</a></li>
+            <li><a href="list_delivery.php"><i class="fa fa-list"></i> List PR</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
             <span>Purchase Request</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
