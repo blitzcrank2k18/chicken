@@ -48,6 +48,6 @@ include('../dist/includes/dbcon.php');
 			VALUES('$id','$coops_taken','$coops_return','$date_taken','$date_return','$guard_taken','$guard_return')")or die(mysqli_error($con));
 
 			echo "<script type='text/javascript'>alert('Successfully added new delivery!');</script>";
-			echo "<script>document.location='delivery.php'</script>";  
+			echo "<script>document.location='live_weight.php?id=$id'</script>";  
 		
 ?>

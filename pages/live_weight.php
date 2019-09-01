@@ -53,7 +53,7 @@ endif;
                   <table class="table table-striped">
                     <tr>
                       <td>
-                        <input type="hidden" class="form-control" id="name" name="id[]" value="<?php echo $row['prod_id'];?>">
+                        <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $_REQUEST['id'];?>">
                         <input type="text" class="form-control" id="name" name="weight">
                       </td>
 
@@ -68,9 +68,15 @@ endif;
                 
                 <!-- /.box-footer -->
             </div>
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title col-md-12"><a href="processing.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-success">Proceed to Step 3</a></h3>
+                <!-- /.box-body -->
+                <!-- form start -->
+              </div>
+              
             </div>
-            <!-- /.box -->
-           
+        </div>
             <!-- /.box -->
         <div class="col-md-6">
           <!-- Horizontal Form -->
@@ -82,21 +88,25 @@ endif;
             <!-- form start -->
             <table class="table table-striped">
                 <tbody><tr>
+                  <th>#</th>
                   <th>Weight</th>
                   <th>Coops</th>
                 </tr>
-      <?php
-       include('../dist/includes/dbcon.php');
-        $query=mysqli_query($con,"select * from live_weight")or die(mysqli_error());
-          while($row=mysqli_fetch_array($query)){
-      ?>
+          <?php
+           include('../dist/includes/dbcon.php');
+           $id=$_REQUEST['id'];
+            $query=mysqli_query($con,"select * from live_weight where delivery_id='$id'")or die(mysqli_error());
+              $i=1;
+              while($row=mysqli_fetch_array($query)){
+          ?>
         
                 <tr>
+                  <td><?php echo $i;?></td>
                   <td><?php echo $row['weight'];?></td>
                   <td><?php echo $row['coops'];?></td>
                 </tr>
                 
-      <?php }?>          
+          <?php $i++;}?>          
               </tbody></table>
               </form>
           </div>
@@ -110,32 +120,109 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-<?php
-       include('../dist/includes/dbcon.php');
-        $query=mysqli_query($con,"select * from live_weight")or die(mysqli_error());
-          $row=mysqli_fetch_array($query);
-      ?>            
-            <table class="table table-striped">
-                <tbody><tr>
-                  <th>Total # of Birds (pcs)</th>
-                  <th>Coops</th>
-                </tr>
-                <tr>
-                  <td>Gross Weight (kg)</td>
-                  <td><?php echo $row['coops'];?></td>
-                </tr>
-                <tr>
-                  <td>Net Weight (kg)</td>
-                  <td><?php echo $row['coops'];?></td>
-                </tr>
-                <tr>
-                  <td>ALW</td>
-                  <td><?php echo $row['coops'];?></td>
-                </tr>
-              </tbody></table>
+          <?php
+                 include('../dist/includes/dbcon.php');
+                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight where delivery_id='$id'")or die(mysqli_error());
+                    $row=mysqli_fetch_array($query);
+                ?>            
+              <table class="table table-striped">
+                  <tbody><tr>
+                    <th>Total # of Birds (pcs)</th>
+                    <th colspan="2"><?php echo $row['coops']*8;?></th>
+                  </tr>
+                  <tr>
+                    <td>Gross Weight (kg)</td>
+                    <td colspan="2"><?php echo $row['weight'];?></td>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Coops Tare Weight (kg)</th>
+                  </tr>
+                  <tr>
+                    <th>Tare Wt./Pc</th>
+                    <th>No. of Pcs.</th>
+                    <th>Tare Wt. Total</th>
+                  </tr>
+                  <?php
+                    // include('../dist/includes/dbcon.php');
+                      $query1=mysqli_query($con,"select * from tare where delivery_id='$id'")or die(mysqli_error($con));
+                        while($row1=mysqli_fetch_array($query1)){
+                  ?> 
+                  <tr>
+                    <td><?php echo $row1['tare_weight'];?></td>
+                    <td><?php echo $row1['tare_pc'];?></td>
+                    <td><?php echo $row1['tare_total'];?></td>
+                  </tr>
+                  <?php }?>
+                  <tr>
+                    <td>Net Weight (kg)</td>
+                    <td colspan="2"><?php echo $row['weight'];?></td>
+                  </tr>
+                  <tr>
+                    <td>ALW</td>
+                    <td colspan="2"><?php echo $row['coops'];?></td>
+                  </tr>
+                  <?php
+                    // include('../dist/includes/dbcon.php');
+                      $query2=mysqli_query($con,"select * from death where delivery_id='$id'")or die(mysqli_error($con));
+                        while($row2=mysqli_fetch_array($query2)){
+                  ?> 
+                  <tr>
+                    <td><?php echo strtoupper($row2['death_type']);?></td>
+                    <td><?php echo $row2['death_pc'];?> </td>
+                    <td><?php echo $row2['death_wt'];?> </td>
+                  </tr>
+                  <?php }?>
+                  
+                </tbody></table>
+              </form>
+          </div>
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Other Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+                        
+              <form method="post" action="tare_add.php">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>Tare Wt./pc</th>
+                    <th>No. Of Pcs</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
+                      <input type="text" class="form-control" id="name" name="tare_weight"></td>
+                    <td><input type="number" class="form-control" id="name" name="tare_pc"></td>
+                  </tr>
+                  <tr>
+                    <th>DOA pc</th>
+                    <th>DOA Wt.</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="doa_pc"></td>
+                    <td><input type="number" class="form-control" id="name" name="doa_wt"></td>
+                  </tr>
+                  <tr>
+                    <th>DAA pc</th>
+                    <th>DAA Wt.</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="daa_pc"></td>
+                    <td><input type="number" class="form-control" id="name" name="daa_wt"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><button type="submit" class="btn btn-info pull-right">Add</button></td>
+                  </tr>
+                </tbody>
+              </table>
               </form>
           </div>
         </div>
+
       <!-- /.box -->
     </div>
     </section>

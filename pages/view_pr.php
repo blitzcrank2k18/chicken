@@ -54,6 +54,8 @@ endif;
           <!-- Horizontal Form -->
           <div class="box box-danger">
             <div class="box-header with-border">
+              <h4 style="text-align: center!important;">Malogo Agri. Venture & Mgmt. Services Corp.</h4>
+              <h5 style="text-align: center!important;">Address: Hda. Binunga, Brgy. Guinhalaran, Silay City</h5>
               <h3 style="text-align: center!important;">Purchase Request</h3>
 
                   <a href="pr.php" class="btn btn-default btn-print pull-right">Back</a>

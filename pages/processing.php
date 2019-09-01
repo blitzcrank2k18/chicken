@@ -24,11 +24,11 @@ endif;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        User
+        Live Weight
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">User</a></li>
+        <li><a href="#">Live Weight</a></li>
         <li class="active">Add New</li>
       </ol>
     </section>
@@ -37,168 +37,172 @@ endif;
     <section class="content">
       <!-- Default box -->
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <!-- Horizontal Form -->
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Add New User</h3>
-              </div>
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" method="post" action="user_add.php">
-                <div class="box-body">
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="User Full Name" name="name" required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Username" name="username">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                      <input type="password" class="form-control" id="inputEmail3" placeholder="Password" name="password">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Type</label>
-                    <div class="col-sm-10">
-                        <select class="form-control select2" style="width: 100%;" name="type" required>
-                            <option>recording</option>
-                            <option>operation</option>
-                            <option>admin</option>
-                        </select>
-                    </div>
-                  </div>
-                </div>  
+                <h3 class="box-title col-md-12"><a href="index.php" class="btn btn-block btn-success">Finish</a></h3>
                 <!-- /.box-body -->
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                  <button type="submit" class="btn btn-info pull-right">Save</button>
-                </div>
-                <!-- /.box-footer -->
-              </form>
+                <!-- form start -->
+              </div>
+              
             </div>
-          </div>
+        </div>
             <!-- /.box -->
-           
-            <!-- /.box -->
-        <div class="col-md-8">
+        <div class="col-md-6">
           <!-- Horizontal Form -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">User List</h3>
+              <h3 class="box-title">Chicken Processing</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
+            <form method="post" action="processing_add.php">
             <table class="table table-striped">
                 <tbody><tr>
-                  <th>Name</th>
-                  <th>Username</th>
-                  <th>Type</th>
-                  <th>Action</th>
+                  <th>Product Code</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Price</th>
                 </tr>
-      <?php
-       include('../dist/includes/dbcon.php');
-        $query=mysqli_query($con,"select * from user order by name")or die(mysqli_error());
-          while($row=mysqli_fetch_array($query)){
-      ?>
+                <?php
+                 include('../dist/includes/dbcon.php');
+                 $id=$_REQUEST['id'];
+                  $query=mysqli_query($con,"select * from product")or die(mysqli_error());
+                    $i=1;
+                    while($row=mysqli_fetch_array($query)){
+                ?>
         
                 <tr>
-                  <td><?php echo $row['name'];?></td>
-                  <td><?php echo $row['username'];?></td>
-                  <td><?php echo $row['type'];?></td>
-                  <td>
-                    <a href="#update<?php echo $row['user_id'];?>" data-target="#update<?php echo $row['user_id'];?>" data-toggle="modal" class="small-box-footer">edit</a> | 
-      
-                    <a href="#changepass<?php echo $row['user_id'];?>" data-target="#changepass<?php echo $row['user_id'];?>" data-toggle="modal" class="small-box-footer">  password change</a>
-      
-                  </td>
+                  <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
+                  <input type="hidden" class="form-control" id="name" name="product[]" value="<?php echo $row['prod_id'];?>">
+                  <td><?php echo $row['prod_code'];?></td>
+                  <td><?php echo $row['prod_desc'];?></td>
+                  <td><input type="number" class="form-control" id="name" name="qty[]"></td>
+                  <td><?php echo $row['prod_price'];?></td>
                 </tr>
-<div id="update<?php echo $row['user_id'];?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content" style="height:auto">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Update Grower Details</h4>
-              </div>
-              <div class="modal-body">
-        <form class="form-horizontal" method="post" action="user_update.php" enctype='multipart/form-data'>
                 
-        <div class="form-group">
-          <label class="control-label col-lg-3" for="name">Name</label>
-          <div class="col-lg-9"><input type="hidden" class="form-control" id="id" name="id" value="<?php echo $row['user_id'];?>" required>  
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $row['name'];?>" required>  
+          <?php $i++;}?>          
+                <tr>
+                  <td colspan="4"><button type="submit" class="btn btn-info pull-right">Save</button></td>
+                </tr>
+              </tbody>
+            </table>
+              </form>
           </div>
-        </div> 
-        <div class="form-group">
-          <label class="control-label col-lg-3" for="price">Username</label>
-          <div class="col-lg-9">
-            <input type="text" class="form-control" id="price" name="username" value="<?php echo $row['username'];?>">  
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-lg-3" for="price">Type</label>
-          <div class="col-lg-9">
-            <select class="form-control select2" style="width: 100%;" name="type" required>
-                <option><?php echo $row['type'];?></option>
-                <option>driver</option>
-                <option>guard</option>
-                <option>user</option>
-            </select>
-          </div>
-        </div>
-        
 
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Processed List</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            
+            <table class="table table-striped">
+                <tbody><tr>
+                  <th>Product Code</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                </tr>
+                <?php
+                 include('../dist/includes/dbcon.php');
+                 $id=$_REQUEST['id'];
+                  $query=mysqli_query($con,"select * from process natural join product where delivery_id='$id'")or die(mysqli_error());
+                    $i=1;
+                    $total=0;
+                    while($row=mysqli_fetch_array($query)){
+                      $total=$total+$row['qty'];
+                ?>
         
-              <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-        </form>
-      </div>
-    </div>
- <!--end of modal-->     
- <div id="changepass<?php echo $row['user_id'];?>" class="modal fade in" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-    <div class="modal-content" style="height:auto">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Update Password</h4>
-              </div>
-              <div class="modal-body">
-        <form class="form-horizontal" method="post" action="user_update.php" enctype='multipart/form-data'>
+                <tr>
+                  <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
+                  <input type="hidden" class="form-control" id="name" name="product" value="<?php echo $row['prod_id'];?>">
+                  <td><?php echo $row['prod_code'];?></td>
+                  <td><?php echo $row['prod_desc'];?></td>
+                  <td><?php echo $row['qty'];?></td>
+                  <td><?php echo $row['prod_price'];?></td>
+                </tr>
                 
-        <div class="form-group">
-          <label class="control-label col-lg-3" for="name">Name</label>
-          <div class="col-lg-9"><input type="hidden" class="form-control" id="id" name="id" value="<?php echo $row['user_id'];?>" required>  
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $row['name'];?>" required>  
+          <?php $i++;}?>          
+                <tr>
+                  <th colspan="2" style="">TOTAL</th>
+                  <th colspan="2" style=""><?php echo $total;?></th>
+                </tr>
+              </tbody>
+            </table>
+            
           </div>
-        </div> 
-        
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
         </div>
-      </form>
-        </div>
-      
-        </div><!--end of modal-dialog-->
- </div>
- <!--end of modal-->                                   
-      <?php }?>          
-              </tbody></table>
+        <div class="col-md-4">
+          <!-- Horizontal Form -->
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Summary of Live Chicken</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+          <?php
+                 include('../dist/includes/dbcon.php');
+                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight where delivery_id='$id'")or die(mysqli_error());
+                    $row=mysqli_fetch_array($query);
+                ?>            
+              <table class="table table-striped">
+                  <tbody><tr>
+                    <th>Total # of Birds (pcs)</th>
+                    <th colspan="2"><?php echo $row['coops']*8;?></th>
+                  </tr>
+                  <tr>
+                    <td>Gross Weight (kg)</td>
+                    <td colspan="2"><?php echo $row['weight'];?></td>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Coops Tare Weight (kg)</th>
+                  </tr>
+                  <tr>
+                    <th>Tare Wt./Pc</th>
+                    <th>No. of Pcs.</th>
+                    <th>Tare Wt. Total</th>
+                  </tr>
+                  <?php
+                    // include('../dist/includes/dbcon.php');
+                      $query1=mysqli_query($con,"select * from tare where delivery_id='$id'")or die(mysqli_error($con));
+                        while($row1=mysqli_fetch_array($query1)){
+                  ?> 
+                  <tr>
+                    <td><?php echo $row1['tare_weight'];?></td>
+                    <td><?php echo $row1['tare_pc'];?></td>
+                    <td><?php echo $row1['tare_total'];?></td>
+                  </tr>
+                  <?php }?>
+                  <tr>
+                    <td>Net Weight (kg)</td>
+                    <td colspan="2"><?php echo $row['weight'];?></td>
+                  </tr>
+                  <tr>
+                    <td>ALW</td>
+                    <td colspan="2"><?php echo $row['coops'];?></td>
+                  </tr>
+                  <?php
+                    // include('../dist/includes/dbcon.php');
+                      $query2=mysqli_query($con,"select * from death where delivery_id='$id'")or die(mysqli_error($con));
+                        while($row2=mysqli_fetch_array($query2)){
+                  ?> 
+                  <tr>
+                    <td><?php echo strtoupper($row2['death_type']);?></td>
+                    <td><?php echo $row2['death_pc'];?> </td>
+                    <td><?php echo $row2['death_wt'];?> </td>
+                  </tr>
+                  <?php }?>
+                  
+                </tbody></table>
+              </form>
           </div>
+          
         </div>
+
       <!-- /.box -->
-        
     </div>
     </section>
     <!-- /.content -->
@@ -407,7 +411,6 @@ endif;
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-
 <!-- ./wrapper -->
 <?php include "../dist/includes/script.php";?>
 </body>

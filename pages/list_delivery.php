@@ -78,7 +78,7 @@ endif;
                   <td><?php echo $row['coops_weight'];?></td>
                   <td><?php echo $row['net_weight'];?></td>
                   <td><?php echo $row['driver'];?></td>
-                  <td><a href="view_pr.php?pr=<?php echo $row['pr_id'];?>" class="small-box-footer">view</a></td>
+                  <td><a href="view_delivery.php?id=<?php echo $row['delivery_id'];?>" class="small-box-footer">view</a></td>
                 </tr>
                 
       <?php }?>          

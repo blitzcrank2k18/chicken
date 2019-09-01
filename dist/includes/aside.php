@@ -40,7 +40,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="delivery.php"><i class="fa fa-plus"></i> Add Delivery</a></li>
-            <li><a href="list_delivery.php"><i class="fa fa-list"></i> List PR</a></li>
+            <li><a href="list_delivery.php"><i class="fa fa-list"></i> List Delivery</a></li>
           </ul>
         </li>
         <li class="treeview">
