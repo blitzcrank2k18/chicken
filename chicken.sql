@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2019 at 04:43 AM
+-- Generation Time: Sep 01, 2019 at 07:11 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -97,6 +97,8 @@ CREATE TABLE `delivery` (
   `net_weight` decimal(10,2) NOT NULL,
   `doa_pcs` int(11) NOT NULL,
   `doa_weight` decimal(10,2) NOT NULL,
+  `daa_pcs` int(11) NOT NULL,
+  `daa_weight` decimal(10,2) NOT NULL,
   `driver` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -104,14 +106,14 @@ CREATE TABLE `delivery` (
 -- Dumping data for table `delivery`
 --
 
-INSERT INTO `delivery` (`delivery_id`, `truck_seal`, `tripno`, `noofcrew`, `timeoutfarm`, `pcshauled`, `houseno`, `farmchecker`, `feed`, `timeweighed`, `alw`, `weigher`, `birdspercoop`, `coopswocover`, `timeinplant`, `grower_id`, `timeinfarm`, `loadstart`, `loadfinish`, `plateno`, `preparedby`, `delivery_date`, `gross_weight`, `coops_weight`, `net_weight`, `doa_pcs`, `doa_weight`, `driver`) VALUES
-(1, '6565', 6, 7, '07:30:00', 0, 0, '', '0000-00-00 00:00:00', '2019-08-25 08:23:24', '0.00', '', 0, 0, '01:00:00', 0, '01:00:00', '01:00:00', '01:00:00', '111', '', '2019-01-01', '0.00', '0.00', '0.00', 0, '0.00', ''),
-(2, '878', 8, 7, '00:00:00', 120, 1, 'gretch', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '0.00', 'allen', 8, 5, '01:00:00', 1, '01:00:00', '03:00:00', '02:00:00', '7676', '', '2019-01-01', '0.00', '0.00', '0.00', 0, '0.00', ''),
-(3, '123', 1, 7, '00:00:00', 10, 12, 'pepay', '2019-08-22 00:00:00', '0000-00-00 00:00:00', '1.50', 'hell', 8, 2, '01:00:00', 1, '01:00:00', '01:30:00', '02:00:00', '233', '', '2020-01-01', '0.00', '2.00', '100.00', 0, '2.00', ''),
-(4, '12', 2, 2, '00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-01-01', '0.00', '12.00', '2.00', 2, '2.50', ''),
-(5, '12', 2, 2, '00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '0000-00-00 00:00:00', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-01-01', '0.00', '12.00', '2.00', 2, '2.50', ''),
-(6, '123', 2, 12, '00:00:00', 120, 12, 'Mitoy', '2019-08-25 00:00:00', '0000-00-00 00:00:00', '1.20', 'alien', 8, 2, '09:00:00', 1, '07:00:00', '07:00:00', '08:00:00', 'test123', '', '2019-08-25', '2.00', '2.00', '4.00', 1, '1.20', ''),
-(7, '', 0, 0, '00:00:00', 0, 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0.00', '', 0, 0, '00:00:00', 1, '00:00:00', '00:00:00', '00:00:00', '', '', '0000-00-00', '0.00', '0.00', '0.00', 0, '0.00', '');
+INSERT INTO `delivery` (`delivery_id`, `truck_seal`, `tripno`, `noofcrew`, `timeoutfarm`, `pcshauled`, `houseno`, `farmchecker`, `feed`, `timeweighed`, `alw`, `weigher`, `birdspercoop`, `coopswocover`, `timeinplant`, `grower_id`, `timeinfarm`, `loadstart`, `loadfinish`, `plateno`, `preparedby`, `delivery_date`, `gross_weight`, `coops_weight`, `net_weight`, `doa_pcs`, `doa_weight`, `daa_pcs`, `daa_weight`, `driver`) VALUES
+(1, '6565', 6, 7, '07:30:00', 0, 0, '', '0000-00-00 00:00:00', '2019-09-01 03:11:08', '0.00', '', 0, 0, '01:00:00', 0, '01:00:00', '01:00:00', '01:00:00', '111', '', '2019-06-06', '0.00', '0.00', '0.00', 0, '0.00', 0, '0.00', ''),
+(2, '878', 8, 7, '00:00:00', 120, 1, 'gretch', '2019-01-01 00:00:00', '2019-09-01 03:11:12', '0.00', 'allen', 8, 5, '01:00:00', 1, '01:00:00', '03:00:00', '02:00:00', '7676', '', '2019-01-11', '0.00', '0.00', '0.00', 0, '0.00', 0, '0.00', ''),
+(3, '123', 1, 7, '00:00:00', 10, 12, 'pepay', '2019-08-22 00:00:00', '2019-09-01 03:11:19', '1.50', 'hell', 8, 2, '01:00:00', 1, '01:00:00', '01:30:00', '02:00:00', '233', '', '2019-07-02', '0.00', '2.00', '100.00', 0, '2.00', 0, '0.00', ''),
+(4, '12', 2, 2, '00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '2019-09-01 03:59:17', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-05-14', '0.00', '12.00', '2.00', 2, '2.50', 5, '10.00', ''),
+(5, '12', 2, 2, '00:00:00', 12, 2, 'jkj', '2019-01-01 00:00:00', '2019-09-01 03:59:24', '2.50', 'ejk', 8, 2, '01:00:00', 1, '01:00:00', '01:00:00', '01:00:00', '12', '', '2019-05-15', '0.00', '12.00', '2.00', 2, '2.50', 2, '5.00', ''),
+(6, '123', 2, 12, '00:00:00', 120, 12, 'Mitoy', '2019-08-25 00:00:00', '0000-00-00 00:00:00', '1.20', 'alien', 8, 2, '09:00:00', 1, '07:00:00', '07:00:00', '08:00:00', 'test123', '', '2019-08-25', '2.00', '2.00', '4.00', 1, '1.20', 0, '0.00', ''),
+(7, '', 0, 0, '00:00:00', 0, 0, '', '0000-00-00 00:00:00', '2019-09-01 03:11:41', '0.00', '', 0, 0, '00:00:00', 1, '00:00:00', '00:00:00', '00:00:00', '', '', '2019-09-04', '0.00', '0.00', '0.00', 0, '0.00', 0, '0.00', '');
 
 -- --------------------------------------------------------
 
@@ -158,7 +160,17 @@ INSERT INTO `history_log` (`history_log_id`, `user_id`, `action`, `date`) VALUES
 (5, 1, 'has logged out the system at ', '2019-08-21 08:48:12'),
 (6, 1, 'has logged in the system at ', '2019-08-21 08:55:20'),
 (7, 0, 'has logged out the system at ', '2019-08-25 09:52:30'),
-(8, 1, 'has logged in the system at ', '2019-08-25 10:01:50');
+(8, 1, 'has logged in the system at ', '2019-08-25 10:01:50'),
+(9, 1, 'has logged in the system at ', '2019-09-01 12:41:18'),
+(10, 3, 'has logged in the system at ', '2019-09-01 12:42:54'),
+(11, 3, 'has logged in the system at ', '2019-09-01 12:43:03'),
+(12, 2, 'has logged in the system at ', '2019-09-01 12:43:11'),
+(13, 2, 'has logged out the system at ', '2019-09-01 12:43:35'),
+(14, 3, 'has logged in the system at ', '2019-09-01 12:47:13'),
+(15, 3, 'has logged out the system at ', '2019-09-01 12:50:37'),
+(16, 3, 'has logged in the system at ', '2019-09-01 12:50:47'),
+(17, 3, 'has logged out the system at ', '2019-09-01 12:50:54'),
+(18, 2, 'has logged in the system at ', '2019-09-01 12:51:01');
 
 -- --------------------------------------------------------
 
@@ -432,10 +444,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `username`, `password`, `type`) VALUES
-(1, 'Lee Pipez', 'admin', 'a1Bz20ydqelm8m1wql21232f297a57a5a743894a0e4a801fc3', 'user'),
-(2, 'Kaye', 'kaye', 'a1Bz20ydqelm8m1wql71e4e5af2c51dabe73732781a9275b30', 'user'),
-(3, 'Joemz', '', 'a1Bz20ydqelm8m1wql202cb962ac59075b964b07152d234b70', 'guard'),
-(4, '', '', 'a1Bz20ydqelm8m1wqld41d8cd98f00b204e9800998ecf8427e', '');
+(1, 'Admin', 'admin', 'a1Bz20ydqelm8m1wql202cb962ac59075b964b07152d234b70', 'admin'),
+(5, 'operations', 'operations', 'a1Bz20ydqelm8m1wql202cb962ac59075b964b07152d234b70', 'operation'),
+(6, 'recording', 'recording', 'a1Bz20ydqelm8m1wql202cb962ac59075b964b07152d234b70', 'recording');
 
 --
 -- Indexes for dumped tables
@@ -565,7 +576,7 @@ ALTER TABLE `grower`
 -- AUTO_INCREMENT for table `history_log`
 --
 ALTER TABLE `history_log`
-  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `live_weight`
 --
@@ -620,7 +631,7 @@ ALTER TABLE `temp_trans`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

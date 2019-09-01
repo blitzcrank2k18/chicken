@@ -1,9 +1,13 @@
-<?php session_start();?>
+<?php session_start();
+if(empty($_SESSION['id'])):
+header('Location:../index.php');
+endif;
+?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<style type="text/css">
-#cssload-pgloading {}
+<head>
+	<style type="text/css">
+		#cssload-pgloading {}
 
 #cssload-pgloading:after {
 		content: "";
@@ -251,11 +255,24 @@
 		84.2% { opacity: 0.75; }
 		91.0% { opacity: 0.87; }
 }
-</style>
 
-	</head>
+	</style>
+</head>	
 <body>
-<div id="cssload-pgloading">
+<div style="width:150px;margin:auto;height:500px;">
+<?php
+	include('../dist/includes/dbcon.php');
+	$date = date("Y-m-d H:i:s");
+	$id=$_SESSION['id'];
+	$remarks="has logged out the system at ";  
+	mysqli_query($con,"INSERT INTO history_log(user_id,action,date) VALUES('$id','$remarks','$date')")or die(mysqli_error($con));
+	
+	session_destroy();
+	
+ echo '<meta http-equiv="refresh" content="2;url=../index.php">';
+ 
+?>
+	<div id="cssload-pgloading">
 		<div class="cssload-loadingwrap">
 			<ul class="cssload-bokeh">
 				<li></li>
@@ -265,72 +282,6 @@
 			</ul>
 		</div>
 	</div>
-
+</div>
 </body>
-
 </html>
-<?php 
-include('dist/includes/dbcon.php');
-
-if(isset($_POST['login']))
-{
-
-$user_unsafe=$_POST['username'];
-$pass_unsafe=$_POST['password'];
-
-$user = mysqli_real_escape_string($con,$user_unsafe);
-$pass1 = mysqli_real_escape_string($con,$pass_unsafe);
-
-$pass=md5($pass1);
-$salt="a1Bz20ydqelm8m1wql";
-$pass=$salt.$pass;
-
-date_default_timezone_set('Asia/Manila');
-
-$date = date("Y-m-d H:i:s");
-
-$query=mysqli_query($con,"select * from user where username='$user' and password='$pass'")or die(mysqli_error($con));
-	$row=mysqli_fetch_array($query);
-           $id=$row['user_id'];
-           $name=$row['name'];
-           //$type=$row['user_type'];
-           $counter=mysqli_num_rows($query);
-           
-           $id=$row['user_id'];
-           $type=$row['type'];
-          // $_SESSION['skin']=$row['skin'];
-
-  	if ($counter == 0) 
-	  {	
-	  echo "<script type='text/javascript'>alert('Invalid Username or Password!');
-	  document.location='index.php'</script>";
-	  } 
-	else
-	  {
-	  $_SESSION['id']=$id;	
-	  $_SESSION['name']=$name;		
-	  $_SESSION['type']=$type;	
-	 
-		$remarks="has logged in the system at ";  
-		mysqli_query($con,"INSERT INTO history_log(user_id,action,date) VALUES('$id','$remarks','$date')")or die(mysqli_error($con));
-		
-		if ($type=="admin")
-		{
-			echo "<script type='text/javascript'>document.location='admin/index.php'</script>";
-		}
-		elseif ($type=="recording")
-		{
-			echo "<script type='text/javascript'>document.location='recording/index.php'</script>";
-		}
-		elseif ($type=="operations")
-		{
-			echo "<script type='text/javascript'>document.location='operations/index.php'</script>";
-		}
-		
-		 
-		
-	  }
-}	 
-?>
-
-	
