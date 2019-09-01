@@ -120,9 +120,9 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-          <?php
+            <?php
                  include('../dist/includes/dbcon.php');
-                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight natural join delivery where live_weight.delivery_id='$id' group by delivery_id")or die(mysqli_error());
+                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from delivery left join live_weight on delivery.delivery_id=live_weight.delivery_id where delivery.delivery_id='$id' group by live_weight.delivery_id")or die(mysqli_error());
                     $row=mysqli_fetch_array($query);
                 ?>            
               <table class="table table-striped">
