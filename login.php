@@ -322,7 +322,7 @@ $query=mysqli_query($con,"select * from user where username='$user' and password
 		{
 			echo "<script type='text/javascript'>document.location='recording/index.php'</script>";
 		}
-		elseif ($type=="operations")
+		else
 		{
 			echo "<script type='text/javascript'>document.location='operations/index.php'</script>";
 		}

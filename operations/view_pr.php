@@ -20,7 +20,7 @@ endif;
       }
     </style>
 <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
-<body class="hold-transition skin-red sidebar-collapse sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -28,7 +28,7 @@ endif;
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include "../dist/includes/aside.php";?>
+  <?php include "../dist/includes/aside_operations.php";?>
   
   <!-- =============================================== -->
 

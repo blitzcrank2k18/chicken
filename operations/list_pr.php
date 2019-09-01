@@ -15,7 +15,7 @@ endif;
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include "../dist/includes/aside_recording.php";?>
+  <?php include "../dist/includes/aside_operations.php";?>
   
   <!-- =============================================== -->
 
@@ -24,11 +24,11 @@ endif;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Delivery
+        Purchase Request
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Delivery</a></li>
+        <li><a href="#">Purchase Request</a></li>
         <li class="active">Add New</li>
       </ol>
     </section>
@@ -41,44 +41,31 @@ endif;
           <!-- Horizontal Form -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Delivery List</h3>
+              <h3 class="box-title">Purchase Request List</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <table class="table table-striped">
                 <tbody><tr>
-                  <th>Delivery Date</th>
-                  <th>Grower</th>
-                  <th>Time In Plant</th>
-                  <th>Truck Seal</th>
-                  <th>Plate No</th>
-                  <th>Pcs Hauled</th>
-                  <th>ALW</th>
-                  <th>Gross Weight</th>
-                  <th>Coops Weight</th>
-                  <th>Net Weight</th>
-                  <th>Driver</th>
+                  <th>Customer Name</th>
+                  <th>Contact</th>
+                  <th>Address</th>
+                  <th>PR Date</th>
                   <th>Status</th>
                 </tr>
       <?php
        include('../dist/includes/dbcon.php');
-        $query=mysqli_query($con,"select * from delivery natural join grower order by delivery_date DESC")or die(mysqli_error());
+        $query=mysqli_query($con,"select * from pr natural join customer order by pr_date DESC")or die(mysqli_error());
           while($row=mysqli_fetch_array($query)){
       ?>
         
                 <tr>
-                  <td><?php echo $row['delivery_date'];?></td>
-                  <td><?php echo $row['grower_name'];?></td>
-                  <td><?php echo $row['timeinplant'];?></td>
-                  <td><?php echo $row['truck_seal'];?></td>
-                  <td><?php echo $row['plateno'];?></td>
-                  <td><?php echo $row['pcshauled'];?></td>
-                  <td><?php echo $row['alw'];?></td>
-                  <td><?php echo $row['gross_weight'];?></td>
-                  <td><?php echo $row['coops_weight'];?></td>
-                  <td><?php echo $row['net_weight'];?></td>
-                  <td><?php echo $row['driver'];?></td>
-                  <td><a href="view_delivery.php?id=<?php echo $row['delivery_id'];?>" class="small-box-footer">view</a></td>
+                  <td><?php echo $row['cust_name'];?></td>
+                  <td><?php echo $row['cust_contact'];?></td>
+                  <td><?php echo $row['cust_address'];?></td>
+                  <td><?php echo $row['pr_date'];?></td>
+                  <td><a href="view_pr.php?pr=<?php echo $row['pr_id'];?>" class="small-box-footer">view</a>
+                  </td>
                 </tr>
                 
       <?php }?>          

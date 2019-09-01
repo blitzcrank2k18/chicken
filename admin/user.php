@@ -148,9 +148,9 @@ endif;
           <div class="col-lg-9">
             <select class="form-control select2" style="width: 100%;" name="type" required>
                 <option><?php echo $row['type'];?></option>
-                <option>driver</option>
-                <option>guard</option>
-                <option>user</option>
+                <option>recording</option>
+                <option>operation</option>
+                <option>admin</option>
             </select>
           </div>
         </div>
