@@ -14,11 +14,11 @@ include('../dist/includes/dbcon.php');
 
   /* Getting demo_click table data */
   $year=$_POST['year'];
-  $sql = "SELECT SUM(amount_due) as total,DATE_FORMAT(sales_date,'%Y/%m') as date FROM `sales` where year(sales_date)='$year' group by date";
+  $sql = "select DATE_FORMAT(delivery_date,'%Y/%m') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where year(delivery_date)='$year' group by date";
                   $click = mysqli_query($con,$sql);
                   $click = mysqli_fetch_all($click,MYSQLI_ASSOC);
                   $date = json_encode(array_column($click, 'date'),JSON_NUMERIC_CHECK);
-                  $click = json_encode(array_column($click, 'total'),JSON_NUMERIC_CHECK);
+                  $click = json_encode(array_column($click, 'birds'),JSON_NUMERIC_CHECK);
                 
 
 
@@ -58,7 +58,7 @@ $(function () {
             type: 'column'
         },
         title: {
-            text: 'Yearly Sales Report'
+            text: 'Yearly Inventory Report'
         },
         xAxis: {
             categories: data
@@ -94,17 +94,28 @@ $(function () {
                     <table id="example1" class="table table-bordered table-striped">
                     <tr>
                       <th>Month</th>
-                      <th>Sales</th>
+                      <th># of Birds</th>
+                      <th>Weight</th>
+                      <th>ALW</th>
+                      <th>DOA pcs</th>
+                      <th>DOA kg</th>
+                      <th>DAA pcs</th>
+                      <th>DAA kg</th>
                     </tr>
 <?php
     
-    $query=mysqli_query($con,"SELECT SUM(amount_due) as total,DATE_FORMAT(sales_date,'%Y/%m') as date FROM `sales` where year(sales_date)='$year' group by date")or die(mysqli_error($con));
-
-    while($row=mysqli_fetch_array($query)){
+    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where year(delivery_date)='$year' group by date")or die(mysqli_error($con));
+          while($row=mysqli_fetch_array($query)){
     
 ?>                  <tr>
                        <td><?php echo $row['date'];?></td> 
-                       <td><?php echo $row['total'];?></td> 
+                       <td><?php echo $row['birds'];?></td> 
+                       <td><?php echo $row['net_weight'];?></td> 
+                       <td><?php echo $row['alw'];?></td> 
+                       <td><?php echo $row['doa_pcs'];?></td> 
+                       <td><?php echo $row['doa_weight'];?></td>  
+                       <td><?php echo $row['daa_pcs'];?></td> 
+                       <td><?php echo $row['daa_weight'];?></td> 
                     </tr>  
 <?php }?>
                   </table>       
