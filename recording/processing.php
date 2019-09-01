@@ -111,8 +111,10 @@ endif;
                   $query=mysqli_query($con,"select * from process natural join product where delivery_id='$id'")or die(mysqli_error());
                     $i=1;
                     $total=0;
+                    $amount=0;
                     while($row=mysqli_fetch_array($query)){
                       $total=$total+$row['qty'];
+                      $amount=$amount+($row['qty']*$row['prod_price']);
                 ?>
         
                 <tr>
@@ -127,7 +129,8 @@ endif;
           <?php $i++;}?>          
                 <tr>
                   <th colspan="2" style="">TOTAL</th>
-                  <th colspan="2" style=""><?php echo $total;?></th>
+                  <th colspan="" style=""><?php echo $total;?></th>
+                  <th>P<?php echo number_format($amount,2);?></th>
                 </tr>
               </tbody>
             </table>
@@ -143,15 +146,24 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-          <?php
+            <?php
                  include('../dist/includes/dbcon.php');
-                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight where delivery_id='$id'")or die(mysqli_error());
+                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight natural join delivery where live_weight.delivery_id='$id' group by delivery_id")or die(mysqli_error());
                     $row=mysqli_fetch_array($query);
                 ?>            
               <table class="table table-striped">
-                  <tbody><tr>
+                  <tbody>
+                  <tr>
                     <th>Total # of Birds (pcs)</th>
-                    <th colspan="2"><?php echo $row['coops']*8;?></th>
+                    <th colspan="2"><?php echo $row['pcshauled'];?></th>
+                  </tr>  
+                  <tr>
+                    <th>Processed Chicken</th>
+                    <th colspan="2"><?php echo $row['coops']*16;?></th>
+                  </tr>
+                  <tr>
+                    <th class="text-red">Unprocessed Chicken</th>
+                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*16;?></th>
                   </tr>
                   <tr>
                     <td>Gross Weight (kg)</td>
@@ -184,22 +196,20 @@ endif;
                     <td>ALW</td>
                     <td colspan="2"><?php echo $row['coops'];?></td>
                   </tr>
-                  <?php
-                    // include('../dist/includes/dbcon.php');
-                      $query2=mysqli_query($con,"select * from death where delivery_id='$id'")or die(mysqli_error($con));
-                        while($row2=mysqli_fetch_array($query2)){
-                  ?> 
                   <tr>
-                    <td><?php echo strtoupper($row2['death_type']);?></td>
-                    <td><?php echo $row2['death_pc'];?> </td>
-                    <td><?php echo $row2['death_wt'];?> </td>
+                    <td>DOA</td>
+                    <td><?php echo $row['doa_pcs'];?> </td>
+                    <td><?php echo $row['doa_weight'];?> </td>
                   </tr>
-                  <?php }?>
+                  <tr>
+                    <td>DAA</td>
+                    <td><?php echo $row['daa_pcs'];?> </td>
+                    <td><?php echo $row['daa_weight'];?> </td>
+                  </tr>
                   
                 </tbody></table>
               </form>
           </div>
-          
         </div>
 
       <!-- /.box -->

@@ -21,7 +21,7 @@
                   </td>
                   <td><input type="number" class="form-control" id="name" name="pcshauled" value="<?php echo $row['pcshauled'];?>"></td>
                   <td><input type="number" class="form-control" id="name" name="houseno" value="<?php echo $row['houseno'];?>"></td>
-                  <td><input type="text" class="form-control" id="name" name="farm_checker" value="<?php echo $row['farm_checker'];?>"></td>
+                  <td><input type="text" class="form-control" id="name" name="farm_checker" value="<?php echo $row['farmchecker'];?>"></td>
                   <td><input type="date" class="form-control" id="name" name="feed" value="<?php echo $row['feed'];?>"></td>
                 </tr>
                 <tr>
