@@ -12,8 +12,8 @@ include('../dist/includes/dbcon.php');
 	$id = $_POST['id'];
 	$tare_total=$tare_weight*$tare_pc;
 
-			mysqli_query($con,"INSERT INTO tare(tare_weight,tare_pc,tare_total,delivery_id)
-			VALUES('$tare_weight','$tare_pc','$tare_total','$id')")or die(mysqli_error($con));
+	mysqli_query($con,"UPDATE tare SET tare_weight='$tare_weight',tare_pc='$tare_pc',tare_total='$tare_total' where delivery_id='$id'")
+	 or die(mysqli_error($con)); 
 
 			mysqli_query($con,"update delivery set doa_pcs='$doa_pc',doa_weight='$doa_wt',daa_pcs='$daa_pc',daa_weight='$daa_wt' where delivery_id='$id'")or die(mysqli_error($con));
 	

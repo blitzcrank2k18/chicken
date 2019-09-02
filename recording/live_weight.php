@@ -54,7 +54,7 @@ endif;
                     <tr>
                       <td>
                         <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $_REQUEST['id'];?>">
-                        <input type="text" class="form-control" id="name" name="weight">
+                        <input type="text" class="form-control" id="name" name="weight" autofocus="true">
                       </td>
 
                     </tr>
@@ -92,13 +92,13 @@ endif;
                   <th>Weight</th>
                   <th>Coops</th>
                 </tr>
-          <?php
-           include('../dist/includes/dbcon.php');
-           $id=$_REQUEST['id'];
-            $query=mysqli_query($con,"select * from live_weight where delivery_id='$id'")or die(mysqli_error());
-              $i=1;
-              while($row=mysqli_fetch_array($query)){
-          ?>
+                <?php
+                 include('../dist/includes/dbcon.php');
+                 $id=$_REQUEST['id'];
+                  $query=mysqli_query($con,"select * from live_weight where delivery_id='$id'")or die(mysqli_error());
+                    $i=1;
+                    while($row=mysqli_fetch_array($query)){
+                ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
@@ -106,9 +106,10 @@ endif;
                   <td><?php echo $row['coops'];?></td>
                 </tr>
                 
-          <?php $i++;}?>          
-              </tbody></table>
-              </form>
+                <?php $i++;}?>          
+              </tbody>
+            </table>
+            </form>
           </div>
 
         </div>
@@ -133,11 +134,11 @@ endif;
                   </tr>  
                   <tr>
                     <th>Processed Chicken</th>
-                    <th colspan="2"><?php echo $row['coops']*16;?></th>
+                    <th colspan="2"><?php echo $row['coops']*8;?></th>
                   </tr>
                   <tr>
                     <th class="text-red">Unprocessed Chicken</th>
-                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*16;?></th>
+                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*8;?></th>
                   </tr>
                   <tr>
                     <td>Gross Weight (kg)</td>
@@ -205,13 +206,23 @@ endif;
                     <td><input type="number" class="form-control" id="name" name="tare_pc"></td>
                   </tr>
                   <tr>
+                    <th>Tare Wt./pc</th>
+                    <th>No. Of Pcs</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
+                      <input type="text" class="form-control" id="name" name="tare_weight"></td>
+                    <td><input type="number" class="form-control" id="name" name="tare_pc"></td>
+                  </tr>
+                  <tr>
                     <th>DOA pc</th>
                     <th>DOA Wt.</th>
                   </tr>
                   <tr>
                     <td>
-                      <input type="text" class="form-control" id="name" name="doa_pc"></td>
-                    <td><input type="number" class="form-control" id="name" name="doa_wt"></td>
+                      <input type="number" class="form-control" id="name" name="doa_pc"></td>
+                    <td><input type="text" class="form-control" id="name" name="doa_wt"></td>
                   </tr>
                   <tr>
                     <th>DAA pc</th>
@@ -219,11 +230,11 @@ endif;
                   </tr>
                   <tr>
                     <td>
-                      <input type="text" class="form-control" id="name" name="daa_pc"></td>
-                    <td><input type="number" class="form-control" id="name" name="daa_wt"></td>
+                      <input type="number" class="form-control" id="name" name="daa_pc"></td>
+                    <td><input type="text" class="form-control" id="name" name="daa_wt"></td>
                   </tr>
                   <tr>
-                    <td colspan="3"><button type="submit" class="btn btn-info pull-right">Add</button></td>
+                    <td colspan="3"><button type="submit" class="btn btn-info pull-right">Save</button></td>
                   </tr>
                 </tbody>
               </table>

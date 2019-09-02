@@ -41,7 +41,15 @@ endif;
             <!-- Horizontal Form -->
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title col-md-12"><a href="index.php" class="btn btn-block btn-success">Finish</a></h3>
+                <h3 class="box-title col-md-12"><a href="index.php" class="btn btn-block btn-danger">Finish</a></h3>
+                <!-- /.box-body -->
+                <!-- form start -->
+              </div>
+              
+            </div>
+            <div class="box box-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title col-md-12"><a href="process_form.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-success"><i class="fa fa-print"> </i> Print</a></h3>
                 <!-- /.box-body -->
                 <!-- form start -->
               </div>
@@ -159,11 +167,11 @@ endif;
                   </tr>  
                   <tr>
                     <th>Processed Chicken</th>
-                    <th colspan="2"><?php echo $row['coops']*16;?></th>
+                    <th colspan="2"><?php echo $row['coops']*8;?></th>
                   </tr>
                   <tr>
                     <th class="text-red">Unprocessed Chicken</th>
-                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*16;?></th>
+                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*8;?></th>
                   </tr>
                   <tr>
                     <td>Gross Weight (kg)</td>
