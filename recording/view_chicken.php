@@ -10,6 +10,7 @@
                 <tr>
                   <td>
                       <select class="form-control select2" style="width: 100%;" name="grower" required>
+                        <option value="<?php echo $row['grower_id'];?>"><?php echo $row['grower_name'];?></option>
                       <?php
                        include('../dist/includes/dbcon.php');
                         $query2=mysqli_query($con,"select * from grower order by grower_name")or die(mysqli_error());
@@ -33,9 +34,8 @@
 
                 </tr>
                 <tr>
-                  <td><input type="time" class="form-control" id="name" name="time_weighed" value="<?php echo $row['timeweighed'];?>"></td>
-                  <td><input type="text" class="form-control" id="name" name="alw" value="<?php echo $row['alw'];?>"></td>
-                  <td>
+                  
+                  
                     <select class="form-control select2" style="width: 100%;" name="weigher" required>
                       <?php
                        include('../dist/includes/dbcon.php');

@@ -49,9 +49,8 @@ endif;
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#truck" data-toggle="tab" aria-expanded="true">Truck Details</a></li>
-              <li class=""><a href="#chicken" data-toggle="tab" aria-expanded="false">Chicken Details</a></li>
-              <li class=""><a href="#coop" data-toggle="tab" aria-expanded="false">Coop Details</a></li>
+              <li class="active"><a href="#truck" data-toggle="tab" aria-expanded="true">Delivery Details (1)</a></li>
+              <li class=""><a href="#coop" data-toggle="tab" aria-expanded="false">Delivery Details (2)</a></li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="truck">
@@ -59,9 +58,6 @@ endif;
               </div>
               <form method="post" action="delivery_add.php">
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="chicken">
-                <?php include "chicken.php";?>
-              </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="coop">
                 <?php include "coop.php";?>

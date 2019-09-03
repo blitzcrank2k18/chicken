@@ -32,6 +32,7 @@ endif;
     <section class="content-header">
       <h1>
         Live Weight
+        <a class="btn btn-print btn-success" type="button" name="print" onclick="window.print();window.location.href='list_delivery.php';"> <i class="fa fa-print"></i> Print</a>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -58,14 +59,14 @@ endif;
                 <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
-                  $query=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 0,30")or die(mysqli_error());
+                  $query3=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 0,30")or die(mysqli_error());
                     $i=1;
-                    while($row=mysqli_fetch_array($query)){
+                    while($row3=mysqli_fetch_array($query3)){
                 ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
-                  <td><?php echo $row['weight'];?></td>
+                  <td><?php echo $row3['weight'];?></td>
                 </tr>
                 
                 <?php $i++;}?>          
@@ -85,14 +86,14 @@ endif;
                 <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
-                  $query=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 30,30")or die(mysqli_error());
+                  $query4=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 30,30")or die(mysqli_error());
                     $i=31;
-                    while($row=mysqli_fetch_array($query)){
+                    while($row4=mysqli_fetch_array($query4)){
                 ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
-                  <td><?php echo $row['weight'];?></td>
+                  <td><?php echo $row4['weight'];?></td>
                 </tr>
                 
                 <?php $i++;}?>          
@@ -112,14 +113,14 @@ endif;
                 <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
-                  $query=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 60,30")or die(mysqli_error());
+                  $query5=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 60,30")or die(mysqli_error());
                     $i=61;
-                    while($row=mysqli_fetch_array($query)){
+                    while($row5=mysqli_fetch_array($query5)){
                 ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
-                  <td><?php echo $row['weight'];?></td>
+                  <td><?php echo $row5['weight'];?></td>
                 </tr>
                 
                 <?php $i++;}?>          
@@ -139,14 +140,14 @@ endif;
                 <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
-                  $query=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 90,30")or die(mysqli_error());
+                  $query6=mysqli_query($con,"select * from live_weight where delivery_id='$id' limit 90,30")or die(mysqli_error());
                     $i=91;
-                    while($row=mysqli_fetch_array($query)){
+                    while($row6=mysqli_fetch_array($query6)){
                 ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
-                  <td><?php echo $row['weight'];?></td>
+                  <td><?php echo $row6['weight'];?></td>
                 </tr>
                 
                 <?php $i++;}?>          
@@ -212,10 +213,7 @@ endif;
                     <td><?php echo $row['daa_pcs'];?> </td>
                     <td><?php echo $row['daa_weight'];?> </td>
                   </tr>
-                  <tr>
-                    <td>REMARKS</td>
-                    <td colspan="2"><?php echo $row['remarks'];?></td>
-                  </tr>
+                  
                   <tr>
                     <td>Weigher:</td>
                     <td>Verified By:</td>

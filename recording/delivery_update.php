@@ -20,7 +20,8 @@ include('../dist/includes/dbcon.php');
 	$grower = $_POST['grower'];
 	$houseno = $_POST['houseno'];
 	$farm_checker = $_POST['farm_checker'];
-	$feed = $_POST['feed'];
+	$timefeed = $_POST['timefeed'];
+	$datefeed = $_POST['datefeed'];
 	$time_weighed = $_POST['time_weighed'];
 	$birdspercoop = $_POST['birdspercoop'];
 	$coopswocover = $_POST['coopswocover'];
@@ -40,10 +41,12 @@ include('../dist/includes/dbcon.php');
 	$doa_weight = $_POST['doa_weight'];
 	$time_taken = $_POST['time_taken'];
 	$time_return = $_POST['time_return'];
+	$status = $_POST['status'];
+	$reason = $_POST['reason'];
 
-	mysqli_query($con,"update delivery set truck_seal='$seal',tripno='$trips',noofcrew='$crew',plateno='$plateno',delivery_date='$date',timeoutfarm='$timeout_farm',timeinfarm='$timein_farm',loadstart='$load_start',loadfinish='$load_finish',timeinplant='$timein',pcshauled='$pcshauled',houseno='$houseno',farmchecker='$farm_checker',feed='$feed',timeweighed='$time_weighed',alw='$alw',delivery_weigher='$weigher',birdspercoop='$birdspercoop',coopswocover='$coopswocover',grower_id='$grower',doa_weight='$doa_weight',doa_pcs='$doa_pcs',net_weight='$net_weight',gross_weight='$gross',driver='$driver' where delivery_id='$id'")or die(mysqli_error($con));
+	mysqli_query($con,"update delivery set truck_seal='$seal',tripno='$trips',noofcrew='$crew',plateno='$plateno',delivery_date='$date',timeoutfarm='$timeout_farm',timeinfarm='$timein_farm',loadstart='$load_start',loadfinish='$load_finish',timeinplant='$timein',pcshauled='$pcshauled',houseno='$houseno',farmchecker='$farm_checker',datefeed='$datefeed',timefeed='$timefeed',timeweighed='$time_weighed',alw='$alw',delivery_weigher='$weigher',birdspercoop='$birdspercoop',coopswocover='$coopswocover',grower_id='$grower',doa_weight='$doa_weight',doa_pcs='$doa_pcs',net_weight='$net_weight',gross_weight='$gross',driver='$driver',birdstatus='$status',reason='$reason' where delivery_id='$id'")or die(mysqli_error($con));
 
-			mysqli_query($con,"update loops set delivery_id='$id',looptaken='$coops_taken',loopreturn='$coops_return',takedate='$date_taken',returndate='$date_return',takenguard='$guard_taken',returnguard='$guard_return',taketime='$time_taken',returntime='$time_return' where delivery_id='$id'")or die(mysqli_error($con));
+			mysqli_query($con,"update loops set delivery_id='$id',looptaken='$coops_taken',loopreturn='$coops_return',takedate='$date_taken',returndate='$date_return',takenguard='$guard_taken',returnguard='$guard_return',taketime='$time_taken',returntime='$time_return',coops_weight='$coops_weight' where delivery_id='$id'")or die(mysqli_error($con));
 
 			//mysqli_query($con,"INSERT INTO tare(delivery_id) VALUES('$id')")or die(mysqli_error($con));
 

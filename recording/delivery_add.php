@@ -19,7 +19,8 @@ include('../dist/includes/dbcon.php');
 	$grower = $_POST['grower'];
 	$houseno = $_POST['houseno'];
 	$farm_checker = $_POST['farm_checker'];
-	$feed = $_POST['feed'];
+	$datefeed = $_POST['datefeed'];
+	$timefeed = $_POST['timefeed'];
 	$time_weighed = $_POST['time_weighed'];
 	$birdspercoop = $_POST['birdspercoop'];
 	$coopswocover = $_POST['coopswocover'];
@@ -39,9 +40,12 @@ include('../dist/includes/dbcon.php');
 	$guard_return = $_POST['guard_return'];
 	$doa_pcs = $_POST['doa_pcs'];
 	$doa_weight = $_POST['doa_weight'];
+	$destination = $_POST['destination'];
+	$reason = $_POST['reason'];
+	$status = $_POST['status'];
 
-			mysqli_query($con,"INSERT INTO delivery(truck_seal,tripno,noofcrew,plateno,delivery_date,timeoutfarm,timeinfarm,loadstart,loadfinish,timeinplant,pcshauled,houseno,farmchecker,feed,timeweighed,alw,delivery_weigher,birdspercoop,coopswocover,grower_id,doa_weight,doa_pcs,net_weight,gross_weight,driver)
-			VALUES('$seal','$trips','$crew','$plateno','$date','$timeout_farm','$timein_farm','$load_start','$load_finish','$timein','$pcshauled','$houseno','$farm_checker','$feed','$time_weighed','$alw','$weigher','$birdspercoop','$coopswocover','$grower','$doa_weight','$doa_pcs','$net_weight','$gross','$driver')")or die(mysqli_error($con));
+			mysqli_query($con,"INSERT INTO delivery(truck_seal,tripno,noofcrew,plateno,delivery_date,timeoutfarm,timeinfarm,loadstart,loadfinish,timeinplant,pcshauled,houseno,farmchecker,datefeed,timefeed,timeweighed,alw,delivery_weigher,birdspercoop,coopswocover,grower_id,doa_weight,doa_pcs,net_weight,gross_weight,driver,destination,birdstatus,reason)
+			VALUES('$seal','$trips','$crew','$plateno','$date','$timeout_farm','$timein_farm','$load_start','$load_finish','$timein','$pcshauled','$houseno','$farm_checker','$datefeed','$timefeed','$time_weighed','$alw','$weigher','$birdspercoop','$coopswocover','$grower','$doa_weight','$doa_pcs','$net_weight','$gross','$driver','$destination','$status','$reason')")or die(mysqli_error($con));
 
 			$id=mysqli_insert_id($con);	        
 

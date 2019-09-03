@@ -41,7 +41,10 @@ endif;
             <!-- Horizontal Form -->
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title col-md-12"><a href="index.php" class="btn btn-block btn-danger">Finish</a></h3>
+                <h3 class="box-title col-md-12">
+                  <a href="index.php" class="btn btn-block btn-danger">Finish</a>
+                    <a href="live_weight.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-warning">Back</a>
+                </h3>
                 <!-- /.box-body -->
                 <!-- form start -->
               </div>

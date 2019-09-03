@@ -18,7 +18,13 @@ endif;
   <?php include "../dist/includes/aside_recording.php";?>
   
   <!-- =============================================== -->
-
+  <?php
+           include('../dist/includes/dbcon.php');
+           $id=$_REQUEST['id'];
+            $query=mysqli_query($con,"select * from delivery natural join grower where delivery_id='$id'")or die(mysqli_error());
+              $i=1;
+              $row=mysqli_fetch_array($query);
+          ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -49,30 +55,22 @@ endif;
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#truck" data-toggle="tab" aria-expanded="true">Truck Details</a></li>
-              <li class=""><a href="#chicken" data-toggle="tab" aria-expanded="false">Chicken Details</a></li>
-              <li class=""><a href="#coop" data-toggle="tab" aria-expanded="false">Coop Details</a></li>
+              <li class="active"><a href="#truck" data-toggle="tab" aria-expanded="true">Delivery Details (1)</a></li>
+              <li class=""><a href="#coop" data-toggle="tab" aria-expanded="false">Delivery Details (2)</a></li>
               <li>
                   <a href="live_weight.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-danger">Live Weight Details</a>
               </li>
+              <li>
+                  <a href="delivery_print.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-warning"> <i class="fa fa-print"></i> Print Delivery Details</a>
+              </li>
             </ul>
-            <?php
-           include('../dist/includes/dbcon.php');
-           $id=$_REQUEST['id'];
-            $query=mysqli_query($con,"select * from delivery where delivery_id='$id'")or die(mysqli_error());
-              $i=1;
-              $row=mysqli_fetch_array($query);
-          ?>
+            
             <input type="hidden" name="id" value="<?php echo $id;?>">
             <div class="tab-content">
               <div class="tab-pane active" id="truck">
                 <?php include "view_truck.php";?>
               </div>
               <form method="post" action="delivery_add.php">
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="chicken">
-                <?php include "view_chicken.php";?>
-              </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="coop">
                 
