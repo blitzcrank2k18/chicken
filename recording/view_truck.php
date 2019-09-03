@@ -1,10 +1,4 @@
-          <?php
-           include('../dist/includes/dbcon.php');
-           $id=$_REQUEST['id'];
-            $query=mysqli_query($con,"select * from delivery where delivery_id='$id'")or die(mysqli_error());
-              $i=1;
-              $row=mysqli_fetch_array($query);
-          ?>
+          
           <table class="table table-striped">
               <tbody>
                 <tr>

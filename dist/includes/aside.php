@@ -68,6 +68,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="product.php"><i class="fa fa-circle-o"></i> Product</a></li>
+            <li><a href="personnel.php"><i class="fa fa-circle-o"></i> Personnel</a></li>
             <li><a href="grower.php"><i class="fa fa-circle-o"></i> Grower</a></li>
             <li><a href="customer.php"><i class="fa fa-circle-o"></i> Customer</a></li>
             <li><a href="user.php"><i class="fa fa-circle-o"></i> User</a></li>

@@ -44,7 +44,7 @@ endif;
               
                 <!-- /.box-body -->
                 <!-- form start -->
-              <form class="form-horizontal" method="post" action="delivery_add.php">
+              <form class="form-horizontal" method="post" action="delivery_update.php">
              
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
@@ -56,9 +56,14 @@ endif;
                   <a href="live_weight.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-danger">Live Weight Details</a>
               </li>
             </ul>
-            <?php 
-              $id=$_REQUEST['id'];
-            ?>
+            <?php
+           include('../dist/includes/dbcon.php');
+           $id=$_REQUEST['id'];
+            $query=mysqli_query($con,"select * from delivery where delivery_id='$id'")or die(mysqli_error());
+              $i=1;
+              $row=mysqli_fetch_array($query);
+          ?>
+            <input type="hidden" name="id" value="<?php echo $id;?>">
             <div class="tab-content">
               <div class="tab-pane active" id="truck">
                 <?php include "view_truck.php";?>
@@ -70,6 +75,7 @@ endif;
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="coop">
+                
                 <?php include "view_coop.php";?>
                 <div class="box-footer">
                   <button type="submit" class="btn btn-default pull-right">Cancel</button>

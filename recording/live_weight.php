@@ -41,11 +41,20 @@ endif;
             <!-- Horizontal Form -->
             <div class="box box-danger">
               <div class="box-header with-border">
+                <h3 class="box-title col-md-12"><a href="processing.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-success">Proceed to Step 3</a>
+                  <a href="view_delivery.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-warning">Back</a>
+                </h3>
+                <!-- /.box-body -->
+                <!-- form start -->
+              </div>
+            </div>
+            <div class="box box-danger">
+              <div class="box-header with-border">
                 <h3 class="box-title">Add New Live Weight</h3>
                 <!-- /.box-body -->
                 <!-- form start -->
               </div>
-              <form class="form-horizontal" method="post" action="live_weight_add.php">
+              <form class="form-horizontal" method="post" action="live_weight_add.php" required>
                 
               <!-- /.box-header -->
               
@@ -61,21 +70,71 @@ endif;
                   </table>
                   <div class="box-footer">
                     <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                    <button type="submit" class="btn btn-danger pull-right">Save</button>
                   </div>    
                 </div>
-
+            </form>    
                 
                 <!-- /.box-footer -->
             </div>
+            <?php
+                  $id=$_REQUEST['id'];
+                 include('../dist/includes/dbcon.php');
+                  $queryp=mysqli_query($con,"select * from delivery where delivery_id='$id'")or die(mysqli_error($con));
+                    $rowp=mysqli_fetch_array($queryp);
+                ?>   
             <div class="box box-danger">
-              <div class="box-header with-border">
-                <h3 class="box-title col-md-12"><a href="processing.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-block btn-success">Proceed to Step 3</a></h3>
-                <!-- /.box-body -->
+                <div class="box-header with-border">
+                  <h3 class="box-title">Personnel</h3>
+                </div>
+                <!-- /.box-header -->
                 <!-- form start -->
+                            
+                  <form method="post" action="assigned.php">
+                  <table class="table table-striped">
+                    <tbody><input type="hidden" name="id" value="<?php echo $_REQUEST['id'];?>">
+                      <tr>
+                        <th>Weigher</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select class="form-control select2" style="width: 100%;" name="weigher" required>
+                            <option><?php echo $rowp['weigher'];?></option>
+                          <?php
+                             include('../dist/includes/dbcon.php');
+                              $query2=mysqli_query($con,"select * from personnel order by personnel_name")or die(mysqli_error());
+                                while($row2=mysqli_fetch_array($query2)){
+                            ?>
+                              <option><?php echo $row2['personnel_name'];?></option>
+                            <?php }?>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Verifier</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select class="form-control select2" style="width: 100%;" name="verifier" required>
+                            <option><?php echo $rowp['verifier'];?></option>
+                          <?php
+                             include('../dist/includes/dbcon.php');
+                              $query3=mysqli_query($con,"select * from personnel order by personnel_name")or die(mysqli_error());
+                                while($row3=mysqli_fetch_array($query3)){
+                            ?>
+                              <option><?php echo $row3['personnel_name'];?></option>
+                            <?php }?>
+                          </select>
+                        </td>
+                      </tr>
+                     
+                      <tr>
+                        <td colspan="3"><button type="submit" class="btn btn-danger pull-right">Save</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </form>
               </div>
-              
-            </div>
         </div>
             <!-- /.box -->
         <div class="col-md-6">
@@ -91,6 +150,7 @@ endif;
                   <th>#</th>
                   <th>Weight</th>
                   <th>Coops</th>
+                  <th>Action</th>
                 </tr>
                 <?php
                  include('../dist/includes/dbcon.php');
@@ -98,18 +158,82 @@ endif;
                   $query=mysqli_query($con,"select * from live_weight where delivery_id='$id'")or die(mysqli_error());
                     $i=1;
                     while($row=mysqli_fetch_array($query)){
+                      $lwid=$row['live_weight_id'];
                 ?>
         
                 <tr>
                   <td><?php echo $i;?></td>
                   <td><?php echo $row['weight'];?></td>
                   <td><?php echo $row['coops'];?></td>
+                  <td>
+                    <a href="#update<?php echo $lwid;?>" data-target="#update<?php echo $lwid;?>" data-toggle="modal" class="small-box-footer"><i class="fa fa-pencil"></i></a> | 
+                    <a href="#delete<?php echo $lwid;?>" data-target="#delete<?php echo $lwid;?>" data-toggle="modal" class="small-box-footer"><i class="fa fa-trash text-red"></i></a>
+                  </td>
                 </tr>
+<div id="update<?php echo $lwid;?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="height:auto">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Update Live Weight Details</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" method="post" action="live_weight_update.php" enctype='multipart/form-data'>
+                        
+                  <div class="form-group">
+                    <label class="control-label col-lg-3" for="name">Weight</label>
+                    <div class="col-lg-9">
+                      <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $id;?>" required>  
+                      <input type="hidden" class="form-control" id="id" name="lwid" value="<?php echo $lwid;?>" required>  
+                      <input type="text" class="form-control" id="name" name="weight" value="<?php echo $row['weight'];?>" required>  
+                    </div>
+                  </div> 
+                 
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </form>
+              </div><!--end of modal-body-->
+            </div><!--end of modal-content-->
+     </div><!--end of modal-dialog-->
+ </div>
+
+ <div id="delete<?php echo $lwid;?>" class="modal fade in" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="height:auto">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Remove Live Weight</h4>
+              </div>
+              <div class="modal-body">
+        <form class="form-horizontal" method="post" action="live_weight_remove.php" enctype='multipart/form-data'>
                 
+        <div class="form-group">
+          <label class="control-label col-lg-3" for="name">Weight</label>
+          <div class="col-lg-9">
+            <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $id;?>" required>  
+            <input type="hidden" class="form-control" id="id" name="lwid" value="<?php echo $lwid;?>" required>  
+            Are you sure you want to remove <?php echo $row['weight'];?>?  
+          </div>
+        </div> 
+       
+              <div class="modal-footer">
+    <button type="submit" class="btn btn-danger">Confirm Remove</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+        </form>
+            </div>
+      
+        </div><!--end of modal-dialog-->
+ </div>
+ <!--end of modal--> 
                 <?php $i++;}?>          
               </tbody>
             </table>
-            </form>
+           
           </div>
 
         </div>
@@ -129,20 +253,20 @@ endif;
               <table class="table table-striped">
                   <tbody>
                   <tr>
-                    <th>Total # of Birds (pcs)</th>
-                    <th colspan="2"><?php echo $row['pcshauled'];?></th>
+                    <th colspan="2">Total # of Birds (pcs)</th>
+                    <th colspan=""><?php echo $row['pcshauled'];?></th>
                   </tr>  
                   <tr>
-                    <th>Processed Chicken</th>
-                    <th colspan="2"><?php echo $row['coops']*8;?></th>
+                    <th colspan="2">Processed Chicken</th>
+                    <th colspan=""><?php echo $row['coops']*8;?></th>
                   </tr>
                   <tr>
-                    <th class="text-red">Unprocessed Chicken</th>
-                    <th colspan="2" class="text-red"><?php echo $row['pcshauled']-$row['coops']*8;?></th>
+                    <th class="text-red" colspan="2">Unprocessed Chicken</th>
+                    <th colspan="" class="text-red"><?php echo $row['pcshauled']-$row['coops']*8;?></th>
                   </tr>
                   <tr>
-                    <td>Gross Weight (kg)</td>
-                    <td colspan="2"><?php echo $row['weight'];?></td>
+                    <td colspan="2">Gross Weight (kg)</td>
+                    <td colspan=""><?php echo $row['weight'];?></td>
                   </tr>
                   <tr>
                     <th colspan="3">Coops Tare Weight (kg)</th>
@@ -157,87 +281,54 @@ endif;
                       $query1=mysqli_query($con,"select * from tare where delivery_id='$id'")or die(mysqli_error($con));
                         while($row1=mysqli_fetch_array($query1)){
                   ?> 
+                  <form method="post" action="tare_add.php">
                   <tr>
-                    <td><?php echo $row1['tare_weight'];?></td>
-                    <td><?php echo $row1['tare_pc'];?></td>
-                    <td><?php echo $row1['tare_total'];?></td>
+                    <td>
+                      <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
+                      <input type="hidden" class="form-control" id="name" name="tare_id[]" value="<?php echo $row1['tare_id'];?>">
+                      <input type="text" class="form-control" id="name" name="tare_weight[]" value="<?php echo $row1['tare_weight'];?>"></td>
+                    <td>
+                      <input type="number" class="form-control" id="name" name="tare_pc[]" value="<?php echo $row1['tare_pc'];?>">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="name" value="<?php echo $row1['tare_total'];?>" readonly>
+                    </td>
                   </tr>
                   <?php }?>
                   <tr>
                     <td>Net Weight (kg)</td>
-                    <td colspan="2"><?php echo $row['weight'];?></td>
+                    <td colspan="2"><?php echo $row['net_weight'];?></td>
                   </tr>
                   <tr>
                     <td>ALW</td>
-                    <td colspan="2"><?php echo $row['coops'];?></td>
+                    <td colspan="2"><?php echo $row['alw'];?></td>
                   </tr>
                   <tr>
-                    <td>DOA</td>
-                    <td><?php echo $row['doa_pcs'];?> </td>
-                    <td><?php echo $row['doa_weight'];?> </td>
+                    <td>
+                      DOA
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="doa_pc" value="<?php echo $row['doa_pcs'];?>">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="doa_wt" value="<?php echo $row['doa_weight'];?>">
+                    </td>
                   </tr>
                   <tr>
-                    <td>DAA</td>
-                    <td><?php echo $row['daa_pcs'];?> </td>
-                    <td><?php echo $row['daa_weight'];?> </td>
+                    <td>
+                      DAA
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="daa_pc" value="<?php echo $row['daa_pcs'];?>">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="name" name="daa_wt" value="<?php echo $row['daa_weight'];?>">
+                    </td>
                   </tr>
-                  
+                  <tr>
+                    <td colspan="3"><button type="submit" class="btn btn-danger pull-right">Save</button></td>
+                  </tr>
                 </tbody></table>
-              </form>
-          </div>
-          <div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">Other Details</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-                        
-              <form method="post" action="tare_add.php">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>Tare Wt./pc</th>
-                    <th>No. Of Pcs</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
-                      <input type="text" class="form-control" id="name" name="tare_weight"></td>
-                    <td><input type="number" class="form-control" id="name" name="tare_pc"></td>
-                  </tr>
-                  <tr>
-                    <th>Tare Wt./pc</th>
-                    <th>No. Of Pcs</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $id;?>">
-                      <input type="text" class="form-control" id="name" name="tare_weight"></td>
-                    <td><input type="number" class="form-control" id="name" name="tare_pc"></td>
-                  </tr>
-                  <tr>
-                    <th>DOA pc</th>
-                    <th>DOA Wt.</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="number" class="form-control" id="name" name="doa_pc"></td>
-                    <td><input type="text" class="form-control" id="name" name="doa_wt"></td>
-                  </tr>
-                  <tr>
-                    <th>DAA pc</th>
-                    <th>DAA Wt.</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="number" class="form-control" id="name" name="daa_pc"></td>
-                    <td><input type="text" class="form-control" id="name" name="daa_wt"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="3"><button type="submit" class="btn btn-info pull-right">Save</button></td>
-                  </tr>
-                </tbody>
-              </table>
               </form>
           </div>
         </div>

@@ -27,7 +27,7 @@
                 <tr>
                   <th>Time Weighed</th>
                   <th>Average Live Weight</th>
-                  <th>Weigher</th>
+                  <th>Delivery Weigher</th>
                   <th>Birds Per Coop</th>
                   <th>Coops w/o Cover</th>
 
@@ -35,7 +35,17 @@
                 <tr>
                   <td><input type="time" class="form-control" id="name" name="time_weighed"></td>
                   <td><input type="text" class="form-control" id="name" name="alw"></td>
-                  <td><input type="text" class="form-control" id="name" name="weigher"></td>
+                  <td>
+                    <select class="form-control select2" style="width: 100%;" name="weigher" required>
+                      <?php
+                       include('../dist/includes/dbcon.php');
+                        $query2=mysqli_query($con,"select * from personnel order by personnel_name")or die(mysqli_error());
+                          while($row2=mysqli_fetch_array($query2)){
+                          ?>
+                            <option><?php echo $row2['personnel_name'];?></option>
+                        <?php }?>
+                    </select>
+                  </td>
                   <td><input type="text" class="form-control" id="name" name="birdspercoop"></td>
                   <td><input type="number" class="form-control" id="name" name="coopswocover"></td>
                 </tr>

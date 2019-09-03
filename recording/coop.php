@@ -1,8 +1,8 @@
           <table class="table table-striped">
               <tbody>
                 <tr>
-                  <th>Coops Taken</th>
-                  <th>Coops Return</th>
+                  <th># of Coops Taken</th>
+                  <th># ofCoops Returned</th>
                   <th>Gross Weight</th>
                 </tr>
                 <tr>
@@ -36,8 +36,28 @@
                   <th>DOA Pieces</th>
                 </tr>
                 <tr>
-                  <td><input type="text" class="form-control" id="name" name="guard_taken"></td>
-                  <td><input type="text" class="form-control" id="name" name="guard_return"></td>
+                  <td>
+                    <select class="form-control select2" style="width: 100%;" name="guard_taken" required>
+                          <?php
+                             include('../dist/includes/dbcon.php');
+                              $query2=mysqli_query($con,"select * from personnel order by personnel_name")or die(mysqli_error());
+                                while($row2=mysqli_fetch_array($query2)){
+                            ?>
+                              <option><?php echo $row2['personnel_name'];?></option>
+                            <?php }?>
+                          </select>
+                  </td>
+                  <td>
+                    <select class="form-control select2" style="width: 100%;" name="guard_return" required>
+                          <?php
+                             include('../dist/includes/dbcon.php');
+                              $query2=mysqli_query($con,"select * from personnel order by personnel_name")or die(mysqli_error());
+                                while($row2=mysqli_fetch_array($query2)){
+                            ?>
+                              <option><?php echo $row2['personnel_name'];?></option>
+                            <?php }?>
+                          </select>
+                  </td>
                   <td><input type="number" class="form-control" id="name" name="doa_pcs"></td>
                 </tr>
                 <tr>
