@@ -22,20 +22,8 @@ endif;
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Sidebar Collapsed
-        <small>Layout with collapsed sidebar on load</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Layout</a></li>
-        <li class="active">Collapsed Sidebar</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
+   <section class="content" style="background-image: url('../dist/img/bg.jpg');height: 600px!important;">
+      <h1 style="text-align: center;font-weight: bolder;margin-top: 180px;font-size: 100px">Welcome <br>Recording Staff!</h1>
       <!-- Default box -->
       <!-- /.box -->
     </section>
