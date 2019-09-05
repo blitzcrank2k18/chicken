@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
   <style type="text/css">
     .login-page{
-      background-image: url("dist/img/bg.png");
+      background-image: url("dist/img/bg.jpg");
       background-repeat: no-repeat;
       background-position: center;
     }
@@ -36,11 +36,9 @@
 </head>
 <body class="login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="index.php"><b>Malogo Agri Venture & Mgmt. Services Crop.</b></a>
-  </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
+    <h1 style="text-align: center;"><b>Malogo Agri Venture & Mgmt. Services Crop.</b></h1>
     <p class="login-box-msg">Log in</p>
 
     <form action="login.php" method="post">
