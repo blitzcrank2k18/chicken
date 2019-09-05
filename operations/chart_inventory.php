@@ -28,7 +28,7 @@ include('../dist/includes/dbcon.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Yearly Sales Report</title>
+  <title>Yearly Inventory Report</title>
   <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
   <script type="text/javascript" src="../dist/js/jquery.js"></script>
   <script src="../dist/js/highcharts.js"></script>
@@ -65,11 +65,11 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Rate'
+                text: 'Quantity'
             }
         },
         series: [{
-            name: 'Monthly Sales',
+            name: 'Month',
             data: data_click
         },]
 

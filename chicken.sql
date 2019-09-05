@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2019 at 02:15 AM
+-- Generation Time: Sep 05, 2019 at 02:21 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -191,7 +191,8 @@ INSERT INTO `history_log` (`history_log_id`, `user_id`, `action`, `date`) VALUES
 (41, 5, 'has logged in the system at ', '2019-09-03 10:05:44'),
 (42, 5, 'has logged out the system at ', '2019-09-03 10:23:38'),
 (43, 6, 'has logged in the system at ', '2019-09-03 10:23:45'),
-(44, 6, 'has logged in the system at ', '2019-09-03 14:09:20');
+(44, 6, 'has logged in the system at ', '2019-09-03 14:09:20'),
+(45, 5, 'has logged in the system at ', '2019-09-05 20:04:47');
 
 -- --------------------------------------------------------
 
@@ -542,10 +543,10 @@ INSERT INTO `sales` (`sales_id`, `total`, `sales_date`, `discount`, `amount_due`
 (1, '310.00', '2019-08-21 00:38:44', '10.00', '320.00', '500.00', '180.00'),
 (2, '310.00', '2019-08-21 00:39:11', '10.00', '320.00', '500.00', '180.00'),
 (3, '310.00', '2019-08-21 00:39:29', '10.00', '320.00', '500.00', '180.00'),
-(4, '310.00', '2019-08-21 00:40:16', '10.00', '320.00', '500.00', '180.00'),
+(4, '310.00', '2019-08-22 00:40:16', '10.00', '320.00', '500.00', '180.00'),
 (5, '310.00', '2019-08-21 00:40:31', '10.00', '320.00', '500.00', '180.00'),
 (6, '150.00', '2019-08-21 00:41:25', '0.00', '150.00', '200.00', '50.00'),
-(7, '200.00', '2019-08-22 00:52:35', '800.00', '1000.00', '1000.00', '0.00');
+(7, '200.00', '2019-07-22 00:52:35', '800.00', '1000.00', '1000.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -779,7 +780,7 @@ ALTER TABLE `grower`
 -- AUTO_INCREMENT for table `history_log`
 --
 ALTER TABLE `history_log`
-  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `history_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `live_weight`
 --

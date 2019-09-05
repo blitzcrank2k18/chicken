@@ -69,11 +69,11 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Rate'
+                text: 'Quantity'
             }
         },
         series: [{
-            name: '# of Birds',
+            name: 'Date',
             data: data_click
         },]
 

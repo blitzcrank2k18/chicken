@@ -69,11 +69,11 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Rate'
+                text: 'Sales'
             }
         },
         series: [{
-            name: 'Daily Sales',
+            name: 'Date',
             data: data_click
         },]
 
@@ -112,6 +112,17 @@ $(function () {
                 ?></td> 
                     </tr>  
 <?php }?>
+<?php
+    
+    $query=mysqli_query($con,"select SUM(amount_due) as total,DATE_FORMAT(sales_date,'%Y/%m/%d') as date from sales where date(sales_date)>='$start' and date(sales_date)<='$end'")or die(mysqli_error($con));
+
+      $row=mysqli_fetch_array($query);
+    
+?>
+                    <tr>
+                       <th>TOTAL SALES</th> 
+                       <th><?php echo $row['total'];?></th> 
+                    </tr>  
                   </table>       
                 </div>
             </div>
