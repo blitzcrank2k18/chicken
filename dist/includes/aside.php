@@ -19,45 +19,6 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-truck"></i>
-            <span>Delivery</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="delivery.php"><i class="fa fa-plus"></i> Add Delivery</a></li>
-            <li><a href="list_delivery.php"><i class="fa fa-list"></i> List Delivery</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-newspaper-o"></i>
-            <span>Purchase Request</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pr.php"><i class="fa fa-plus"></i> Add PR</a></li>
-            <li><a href="list_pr.php"><i class="fa fa-list"></i> List PR</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-opencart"></i>
-            <span>Sales</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="transaction.php"><i class="fa fa-plus"></i> Add Sales</a></li>
-            <li><a href="list_sales.php"><i class="fa fa-list"></i> List Sales</a></li>
-          </ul>
-        </li>
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-files-o"></i>
