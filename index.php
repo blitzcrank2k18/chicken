@@ -38,7 +38,7 @@
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <h1 style="text-align: center;"><b>Malogo Agri Venture & Mgmt. Services Crop.</b></h1>
+    <h1 style="text-align: center;"><b>Malogo Agri Venture & Mgmt. Services Corp.</b></h1>
     <p class="login-box-msg">Log in</p>
 
     <form action="login.php" method="post">
