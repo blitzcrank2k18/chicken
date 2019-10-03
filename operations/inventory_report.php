@@ -64,7 +64,6 @@ endif;
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <button type="reset" class="btn btn-default pull-right">Cancel</button>
                   <button type="submit" class="btn btn-danger pull-right">Print</button>
                 </div>
                 <!-- /.box-footer -->
@@ -98,7 +97,6 @@ endif;
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <button type="reset" class="btn btn-default pull-right">Cancel</button>
                   <button type="submit" class="btn btn-danger pull-right">Print</button>
                 </div>
                 <!-- /.box-footer -->

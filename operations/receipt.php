@@ -50,8 +50,8 @@ endif;
 include('../dist/includes/dbcon.php');
    
 ?>			
-                  <h5><b>Dress Chicken</b> </h5>  
-                  <h6>Contact #: <?php echo $row['branch_name'];?></h6>
+                  <h5><b>Malogo Agri Venture</b> </h5>  
+                  <h6>Contact #: 434-0989</h6>
                   <h6>Date <?php echo date("M d, Y");?> Time <?php echo date("h:i A");?></h6>
 
                   <hr>

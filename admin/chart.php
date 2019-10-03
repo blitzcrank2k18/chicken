@@ -65,7 +65,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Rate'
+                text: 'Sales'
             }
         },
         series: [{
@@ -107,6 +107,17 @@ $(function () {
                        <td><?php echo $row['total'];?></td> 
                     </tr>  
 <?php }?>
+<?php
+    
+    $query=mysqli_query($con,"SELECT SUM(amount_due) as total FROM `sales` where year(sales_date)='$year' group by year(sales_date)")or die(mysqli_error($con));
+
+      $row=mysqli_fetch_array($query);
+    
+?>
+                    <tr>
+                       <th>TOTAL YEARLY SALES</th> 
+                       <th><?php echo $row['total'];?></th> 
+                    </tr>  
                   </table>       
                 </div>
             </div>

@@ -54,7 +54,7 @@ endif;
                 <!-- /.box-body -->
                 <!-- form start -->
               </div>
-              <form class="form-horizontal" method="post" action="live_weight_add.php" required>
+              <form class="form-horizontal" method="post" action="live_weight_add.php">
                 
               <!-- /.box-header -->
               
@@ -63,13 +63,13 @@ endif;
                     <tr>
                       <td>
                         <input type="hidden" class="form-control" id="name" name="id" value="<?php echo $_REQUEST['id'];?>">
-                        <input type="text" class="form-control" id="name" name="weight" autofocus="true">
+                        <input type="text" class="form-control" id="name" name="weight" autofocus="true" required>
                       </td>
 
                     </tr>
                   </table>
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                    <button type="reset" class="btn btn-default pull-right">Cancel</button>
                     <button type="submit" class="btn btn-danger pull-right">Save</button>
                   </div>    
                 </div>

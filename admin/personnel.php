@@ -50,14 +50,14 @@ endif;
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Personnel Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Personnel's Full Name" name="name">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Personnel's Full Name" name="name" required>
                     </div>
                   </div>
                 </div>
 
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                  <button type="reset" class="btn btn-default pull-right">Cancel</button>
                   <button type="submit" class="btn btn-danger pull-right">Save</button>
                 </div>
                 <!-- /.box-footer -->

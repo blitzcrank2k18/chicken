@@ -50,26 +50,26 @@ endif;
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Customer Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Customer Name" name="name">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Customer Name" name="name" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Contact #</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Contact #" name="contact">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Contact #" name="contact" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputEmail3" placeholder="Address" name="address"></textarea>
+                      <textarea class="form-control" id="inputEmail3" placeholder="Address" name="address" required></textarea>
                     </div>
                   </div>
                   
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                  <button type="reset" class="btn btn-default pull-right">Cancel</button>
                   <button type="submit" class="btn btn-info pull-right">Save</button>
                 </div>
                 <!-- /.box-footer -->
@@ -140,7 +140,7 @@ endif;
         </div><!-- /.form group -->
         
               <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
         </form>

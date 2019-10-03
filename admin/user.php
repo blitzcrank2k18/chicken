@@ -158,12 +158,14 @@ endif;
 
         
               <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-primary" name="changename">Save changes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
         </form>
       </div>
     </div>
+  </div>
+</div>
  <!--end of modal-->     
  <div id="changepass<?php echo $row['user_id'];?>" class="modal fade in" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
@@ -177,9 +179,9 @@ endif;
         <form class="form-horizontal" method="post" action="user_update.php" enctype='multipart/form-data'>
                 
         <div class="form-group">
-          <label class="control-label col-lg-3" for="name">Name</label>
+          <label class="control-label col-lg-3" for="name">New Password</label>
           <div class="col-lg-9"><input type="hidden" class="form-control" id="id" name="id" value="<?php echo $row['user_id'];?>" required>  
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $row['name'];?>" required>  
+            <input type="text" class="form-control" id="name" name="password" placeholder="Enter New Password" required>  
           </div>
         </div> 
         
