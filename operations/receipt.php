@@ -49,8 +49,8 @@ endif;
 <?php
 include('../dist/includes/dbcon.php');
    
-?>			
-                  <h5><b>Malogo Agri Venture</b> </h5>  
+?>	
+<?php include "../dist/includes/header_report.php";?>		
                   <h6>Contact #: 434-0989</h6>
                   <h6>Date <?php echo date("M d, Y");?> Time <?php echo date("h:i A");?></h6>
 
@@ -59,7 +59,7 @@ include('../dist/includes/dbcon.php');
 <?php
 
     $sales_id=$_REQUEST['sales_id'];
-    $query=mysqli_query($con,"select * from sales where sales_id='$sales_id'")or die(mysqli_error($con));
+    $query=mysqli_query($con,"select * from sales natural join customer where sales_id='$sales_id'")or die(mysqli_error($con));
       
         $row=mysqli_fetch_array($query);
         $sid=$row['sales_id'];
@@ -72,7 +72,11 @@ include('../dist/includes/dbcon.php');
                   <h3 class="pull-right">OR # <?php echo $row['sales_id'];?></h3>  
                   <table class="table" width="100%">
                     <thead>
-
+                      <tr>
+                        <th colspan="2">Customer Name: <u><?php echo $row['cust_name'];?></u></th>
+                        <th>Contact: <u><?php echo $row['cust_contact'];?></u></th>
+                        <th colspan="2">Address: <u><?php echo $row['cust_address'];?></u></th>
+                      </tr>
                       <tr>
                         <th>Qty</th>
                         <th>Weight</th>
@@ -87,7 +91,7 @@ include('../dist/includes/dbcon.php');
 			$grand=0;
 		while($row=mysqli_fetch_array($query)){
 				//$id=$row['temp_trans_id'];
-				$total= $row['sales_qty']*$row['sales_price'];
+				$total= $row['sales_kg']*$row['sales_price'];
         $weight= $row['sales_kg'];
 				$grand=$grand+$row['sales_total'];;
         
@@ -142,7 +146,10 @@ include('../dist/includes/dbcon.php');
                     
                   </table>
                   
-                  <h3>Cashier:</h3>  
+                  <div style="float: right;margin-right: 200px;margin-top: 50px">
+                       Prepared by: <br><br><br>
+                       <b><?php echo $_SESSION['name'];?></b>
+                  </div>
                 </div><!-- /.box-body -->
 				</div>  
 				</form>	

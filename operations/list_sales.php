@@ -49,6 +49,7 @@ endif;
                 <tbody><tr>
                   <th>Sales ID</th>
                   <th>Sales Date</th>
+                  <th>Customer Name</th>
                   <th>Amount Due</th>
                   <th>Cash Tendered</th>
                   <th>Change</th>
@@ -56,7 +57,7 @@ endif;
                 </tr>
       <?php
           include('../dist/includes/dbcon.php');
-          $query=mysqli_query($con,"select * from sales order by sales_date desc")or die(mysqli_error($con));
+          $query=mysqli_query($con,"select * from sales natural join customer order by sales_date desc")or die(mysqli_error($con));
             
               while($row=mysqli_fetch_array($query)){
               $sid=$row['sales_id'];
@@ -70,6 +71,7 @@ endif;
                 <tr>
                   <td><?php echo $row['sales_id'];?></td>
                   <td><?php echo $row['sales_date'];?></td>
+                  <td><?php echo $row['cust_name'];?></td>
                   <td><?php echo $row['amount_due'];?></td>
                   <td><?php echo $row['cash_tendered'];?></td>
                   <td><?php echo $row['cash_change'];?></td>

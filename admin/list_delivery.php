@@ -55,7 +55,6 @@ endif;
                   <th>Pcs Hauled</th>
                   <th>ALW</th>
                   <th>Gross Weight</th>
-                  <th>Coops Weight</th>
                   <th>Net Weight</th>
                   <th>Driver</th>
                   <th>Status</th>
@@ -75,7 +74,7 @@ endif;
                   <td><?php echo $row['pcshauled'];?></td>
                   <td><?php echo $row['alw'];?></td>
                   <td><?php echo $row['gross_weight'];?></td>
-                  <td><?php echo $row['coops_weight'];?></td>
+                  
                   <td><?php echo $row['net_weight'];?></td>
                   <td><?php echo $row['driver'];?></td>
                   <td><a href="view_delivery.php?id=<?php echo $row['delivery_id'];?>" class="small-box-footer">view</a></td>

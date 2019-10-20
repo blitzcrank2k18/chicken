@@ -109,7 +109,7 @@ endif;
       $grand=0;
     while($row=mysqli_fetch_array($query)){
         $id=$row['temp_trans_id'];
-        $total= $row['qty']*$row['prod_price'];
+        $total= $row['weight']*$row['prod_price'];
         $grand=$grand+$total;
     
 ?>
@@ -205,7 +205,21 @@ endif;
           <form method="post" name="autoSumForm" action="sales_add.php">
           <div class="row">
            <div class="col-md-12">
-              
+              <div class="form-group">
+              <label for="date">Customer Name</label>
+               
+                <select class="form-control select2" name="customer" tabindex="1" autofocus required>
+                <?php
+                //  include('../dist/includes/dbcon.php');
+
+                   $query3=mysqli_query($con,"select * from customer order by cust_name")or die(mysqli_error($con));
+                      while($row3=mysqli_fetch_array($query3)){
+                ?>
+                    <option value="<?php echo $row3['cust_id'];?>"><?php echo $row3['cust_name'];?></option>
+                  <?php }?>
+                </select>
+                
+              </div><!-- /.form group -->
               <div class="form-group">
               <label for="date">Total</label>
               
@@ -222,7 +236,7 @@ endif;
               <div class="form-group">
               <label for="date">Amount Due</label>
               
-                <input type="text" style="text-align:right" class="form-control" id="amount_due" name="amount_due" placeholder="Amount Due" readonly>
+                <input type="text" style="text-align:right" class="form-control" id="amount_due" name="amount_due" placeholder="Amount Due" readonly required>
               
               </div><!-- /.form group -->
               

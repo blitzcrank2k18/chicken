@@ -24,7 +24,6 @@
             <i class="fa fa-files-o"></i>
             <span>Maintenance</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -46,7 +45,8 @@
           <ul class="treeview-menu">
             <li><a href="sales_report.php"><i class="fa fa-circle-o"></i> Sales</a></li>
             <li><a href="inventory_report.php"><i class="fa fa-circle-o"></i> Inventory</a></li>
-           
+            <li><a href="sales_customer.php"><i class="fa fa-circle-o"></i> Sales by Customers</a></li>
+            <li><a href="forecast.php"><i class="fa fa-circle-o"></i> Sales Forecast</a></li>
           </ul>
         </li>
         <li>

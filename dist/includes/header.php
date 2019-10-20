@@ -4,7 +4,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>DC</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Dress Chicken</b></span>
+      <span class="logo-lg"><b>DC</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -14,6 +14,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
+        <img src="../dist/img/logo.png" style="width: 20px;height: 20px;">
+              <span style="font-weight: bolder;">Malogo Agri Venture & Mgt. Services Corp.</span>
       </a>
 
       <div class="navbar-custom-menu">
@@ -23,6 +25,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../dist/img/avatar.png" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $_SESSION['name'];?></span>
+
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->

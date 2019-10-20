@@ -43,7 +43,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="inventory_report.php"><i class="fa fa-circle-o"></i> Inventory</a></li>
-            <!--<li><a href="delivery_report.php"><i class="fa fa-circle-o"></i> Delivery</a></li>-->
+            <li><a href="delivery_report.php"><i class="fa fa-circle-o"></i> Daily Inventory</a></li>-->
           </ul>
         </li>
         <li>

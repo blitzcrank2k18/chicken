@@ -2,10 +2,57 @@
 if(empty($_SESSION['id'])):
 header('Location:../index.php');
 endif;
+
+include('../dist/includes/dbcon.php');
+$year=date("Y/m");
+  $sql = "select DATE_FORMAT(delivery_date,'%Y/%m/%d') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where DATE_FORMAT(delivery_date,'%Y/%m')='$year' group by date";
+                  $click = mysqli_query($con,$sql);
+                  $click = mysqli_fetch_all($click,MYSQLI_ASSOC);
+                  $date = json_encode(array_column($click, 'date'),JSON_NUMERIC_CHECK);
+                  $click = json_encode(array_column($click, 'birds'),JSON_NUMERIC_CHECK);
 ?>
 <!DOCTYPE html>
 <html>
-<?php include "../dist/includes/head.php";?>
+
+  <?php  include "../dist/includes/head.php";?>
+  <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
+  <script type="text/javascript" src="../dist/js/jquery.js"></script>
+  <script type="text/javascript" src="../dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../dist/js/highcharts.js"></script>
+
+
+  
+<script type="text/javascript">
+$(function () { 
+    var data_click = <?php echo $click; ?>;
+
+    var data = <?php echo $date; ?>;
+
+    $('#container1').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Daily Inventory Report'
+        },
+        xAxis: {
+            categories: data
+        },
+        yAxis: {
+            title: {
+                text: '# of Birds'
+            }
+        },
+        series: [{
+            name: 'Daily Inventory',
+            data: data_click
+        },]
+
+    });
+    
+});
+</script>
+
 <!-- ADD THE CLASS sidebar-collapse TO HIDE THE SIDEBAR PRIOR TO LOADING THE SITE -->
 <body class="hold-transition skin-red sidebar-mini">
 <!-- Site wrapper -->
@@ -21,219 +68,59 @@ endif;
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-   <section class="content" style="background-image: url('../dist/img/bg.jpg');height: 600px!important;">
-      <h1 style="text-align: center;font-weight: bolder;margin-top: 180px;font-size: 100px">Welcome <br>Recording Staff!</h1>
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                
+                <div class="panel-body">
+                  
+  <?php $date=date("Y-m-d");?> 
+  <h3 style="text-align: center;">Daily Inventory Report for as of <?php echo $date;?></h3><br><br>
+    
+        
+                    <div id="container1"></div>
+                    <table id="example1" class="table table-bordered table-striped">
+                   
+<?php
+
+    
+    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m/%d') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where DATE_FORMAT(delivery_date,'%Y/%m')='$year' group by date")or die(mysqli_error($con));
+
+    while($row=mysqli_fetch_array($query)){
+    
+?>                  <tr>
+                       <td><?php echo $row['date'];?></td> 
+                       <td><?php echo $row['total'];?></td> 
+                    </tr>  
+<?php }?>
+<?php
+    
+    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m/%d') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where DATE_FORMAT(delivery_date,'%Y/%m')='$year' group by DATE_FORMAT(delivery_date,'%Y/%m')")or die(mysqli_error($con));
+
+      $row=mysqli_fetch_array($query);
+    
+?>
+                    <tr>
+                       <th>TOTAL INVENTORY</th> 
+                       <th><?php echo $row['total'];?></th> 
+                    </tr>             
+                  </table>       
+                </div>
+            </div>
+        </div>
+
       <!-- Default box -->
       <!-- /.box -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <?php include "../dist/includes/footer.php";?>
+    
+  
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Malogo Agri Venture & Mgmt. Services Corp.</a>.</strong> All rights
-    reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<?php include "../dist/includes/script.php";?>
 </body>
 </html>

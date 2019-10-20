@@ -5,6 +5,7 @@ include('../dist/includes/dbcon.php');
 
 	$discount = $_POST['discount'];
 	$amount_due = $_POST['amount_due'];
+	$customer = $_POST['customer'];
 	
 	date_default_timezone_set("Asia/Manila"); 
 	$date = date("Y-m-d H:i:s");
@@ -15,8 +16,8 @@ include('../dist/includes/dbcon.php');
 		$tendered = $_POST['tendered'];
 		$change = $_POST['change'];
 
-		mysqli_query($con,"INSERT INTO sales(discount,amount_due,total,sales_date,cash_tendered,cash_change) 
-	VALUES('$discount','$amount_due','$total','$date','$tendered','$change')")or die(mysqli_error($con));
+		mysqli_query($con,"INSERT INTO sales(discount,amount_due,total,sales_date,cash_tendered,cash_change,cust_id) 
+	VALUES('$discount','$amount_due','$total','$date','$tendered','$change','$customer')")or die(mysqli_error($con));
 		
 	
 	
@@ -29,7 +30,7 @@ include('../dist/includes/dbcon.php');
  			$qty=$row['qty'];
 			$price=$row['prod_price'];
 			$weight=$row['weight'];
-			$subtotal=$price*$qty;
+			$subtotal=$price*$weight;
 			
 			mysqli_query($con,"INSERT INTO sales_details(prod_id,sales_qty,sales_kg,sales_price,sales_id,sales_total) VALUES('$pid','$qty','$weight','$price','$sales_id','$subtotal')")or die(mysqli_error($con));
 			//mysqli_query($con,"UPDATE product SET prod_qty=prod_qty-'$qty' where prod_id='$pid'") or die(mysqli_error($con)); 

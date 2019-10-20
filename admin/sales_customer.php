@@ -15,7 +15,7 @@ endif;
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include "../dist/includes/aside_operations.php";?>
+  <?php include "../dist/includes/aside.php";?>
   
   <!-- =============================================== -->
 
@@ -37,49 +37,16 @@ endif;
     <section class="content">
       <!-- Default box -->
       <div class="row">
-        <div class="col-md-6">
-            <!-- Horizontal Form -->
-            <div class="box box-danger">
-              <div class="box-header with-border">
-                <h3 class="box-title">Select Year</h3>
-              </div>
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" method="post" action="chart_inventory.php">
-                <div class="box-body">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <div class="col-sm-12">
-                        <select class="form-control select2" style="width: 100%;" name="year">
-                            <option>2019</option>      
-                            <option>2020</option>      
-                            <option>2021</option>      
-                            <option>2022</option>      
-                            <option>2023</option>      
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-danger pull-right">Print</button>
-                </div>
-                <!-- /.box-footer -->
-              </form>
-            </div>
-        </div>
         <!-- /.box -->
          <div class="col-md-6">
             <!-- Horizontal Form -->
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Select Date Range</h3>
+                <h3 class="box-title">Select Date</h3>
               </div>
               <!-- /.box-header -->
               <!-- form start -->
-              <form class="form-horizontal" method="post" action="inventory.php">
+              <form class="form-horizontal" method="post" action="customer_range.php">
                 <div class="box-body">
                   <div class="col-sm-12">
                     <div class="form-group">
@@ -138,7 +105,7 @@ endif;
     $('[data-mask]').inputmask()
 
     //Date range picker
-    $('#reservation').daterangepicker()
+    $('#reservation').datepicker()
     //Date range picker with time picker
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
     //Date range as a button
@@ -186,10 +153,6 @@ endif;
     //color picker with addon
     $('.my-colorpicker2').colorpicker()
 
-    //Timepicker
-    $('.timepicker').timepicker({
-      showInputs: false
-    })
   })
 </script>
 </body>

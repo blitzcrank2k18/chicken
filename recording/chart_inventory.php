@@ -1,3 +1,9 @@
+<?php session_start();
+if(empty($_SESSION['id'])):
+header('Location:../index.php');
+endif;
+?>
+
 <?php
 include('../dist/includes/dbcon.php');
   //require('db_config.php');
@@ -65,11 +71,11 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Rate'
+                text: '# of Birds'
             }
         },
         series: [{
-            name: 'Monthly Sales',
+            name: 'Monthly Inventory',
             data: data_click
         },]
 
@@ -83,8 +89,9 @@ $(function () {
 
 <div class="container">
   <br/>
-  <h2 style="text-align: center;">Yearly Inventory Report for <?php echo $year;?>
-   <input class="btn-print btn-primary" type="button" name="print" value="Print" onclick="window.print();window.location.href='inventory_report.php';">            </h2>
+  <?php include('../dist/includes/header_report.php');?>
+  <h3 style="text-align: center;">Yearly Inventory Report for <?php echo $year;?>
+   <input class="btn-print btn-primary" type="button" name="print" value="Print" onclick="window.print();window.location.href='inventory_report.php';">            </h3><br><br>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -119,6 +126,10 @@ $(function () {
                     </tr>  
 <?php }?>
                   </table>       
+                  <div style="float: right;margin-right: 200px;margin-top: 50px">
+                       Prepared by: <br><br><br>
+                       <b><?php echo $_SESSION['name'];?></b>
+                  </div>
                 </div>
             </div>
         </div>

@@ -51,7 +51,7 @@ endif;
           include('../dist/includes/dbcon.php');
           
     $sid=$_REQUEST['sid'];
-    $query=mysqli_query($con,"select * from sales where sales_id='$sid'")or die(mysqli_error($con));
+    $query=mysqli_query($con,"select * from sales antural join customer where sales_id='$sid'")or die(mysqli_error($con));
       
         $row=mysqli_fetch_array($query);
         $sid=$row['sales_id'];
@@ -61,10 +61,17 @@ endif;
         $tendered=$row['cash_tendered'];
         $change=$row['cash_change'];
 ?>      
-   <h3 class="pull-left">OR # <?php echo $row['sales_id'];?></h3>  
+   
                   <table class="table" width="100%">
                     <thead>
-
+                      <tr>
+                        <th colspan="5"><h3 class="pull-right">OR # <?php echo $row['sales_id'];?></h3>  </th>
+                      </tr>
+                      <tr>
+                        <th colspan="2">Customer Name: <u><?php echo $row['cust_name'];?></u></th>
+                        <th>Contact: <u><?php echo $row['cust_contact'];?></u></th>
+                        <th colspan="2">Address: <u><?php echo $row['cust_address'];?></u></th>
+                      </tr>
                       <tr>
                         <th>Qty</th>
                         <th>Weight</th>
