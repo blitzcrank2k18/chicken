@@ -6,20 +6,8 @@ endif;
 
 <?php
 include('../dist/includes/dbcon.php');
-  //require('db_config.php');
 
-
-  /* Getting demo_viewer table data */
-  //$sql = "select SUM(amount_due) from sales natural join sales_details natural join product group by MONTH(date_added)+'-'+YEAR(date_added)";
-//  $sql = "SELECT SUM(numberofview) as count FROM demo_viewer 
-//      GROUP BY YEAR(created_at) ORDER BY created_at";
-//  $viewer = mysqli_query($mysqli,$sql);
-//  $viewer = mysqli_fetch_all($viewer,MYSQLI_ASSOC);
-//  $viewer = json_encode(array_column($viewer, 'count'),JSON_NUMERIC_CHECK);
-
-
-  /* Getting demo_click table data */
-  $date=$_POST['date'];
+  $date=date("Y-m-d",strtotime($_POST['date']));
  
 ?>
 
@@ -51,7 +39,13 @@ include('../dist/includes/dbcon.php');
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                
+<?php
+
+                       include('../dist/includes/dbcon.php');
+                        $query1=mysqli_query($con,"select *,SUM(pcshauled) as received from delivery where delivery_date='$date' group by delivery_date")or die(mysqli_error($con));
+                          $row1=mysqli_fetch_array($query1);
+                          ?>
+
                 <div class="panel-body">
                     <table id="example1" class="table table-bordered table-striped">
                       <tr>
@@ -64,19 +58,19 @@ include('../dist/includes/dbcon.php');
                       </tr>
                       <tr>
                         <th>Volume Received</th>
-                        <th></th>
-                        <th></th>
+                        <th><?php echo $row1['pcshauled'];?></th>
+                        <th><?php echo $row1['net_weight'];?></th>
                         <th>DOA</th>
-                        <th></th>
-                        <th></th>
+                        <th><?php echo $row1['doa_pcs'];?></th>
+                        <th><?php echo $row1['doa_pcs']/$row1['received']*100;?>%</th>
                       </tr>
                       <tr>
                         <th>Volume Processed</th>
-                        <th></th>
-                        <th></th>
+                        <th><?php echo $row1['pcshauled']-$row1['doa_pcs']-$row1['daa_pcs'];?></th>
+                        <th><?php echo number_format($row1['net_weight']-$row1['doa_weight']-$row1['daa_weight'],2);?></th>
                         <th>DAA</th>
-                        <th></th>
-                        <th></th>
+                        <th><?php echo $row1['daa_pcs'];?></th>
+                        <th><?php echo $row1['daa_pcs']/$row1['received']*100;?>%</th>
                       </tr>
                       <tr>
                         <th>Live Weight</th>
@@ -89,10 +83,10 @@ include('../dist/includes/dbcon.php');
                       <tr>
                         <th></th>
                         <th>Average</th>
-                        <th></th>
+                        <th><?php echo $row1['alw'];?></th>
                         <th>TOTAL</th>
-                        <th></th>
-                        <th></th>
+                        <th><?php echo $row1['received'];?></th>
+                        <th>100%</th>
                       </tr>
                       <tr>
                         <th></th>
@@ -114,12 +108,12 @@ include('../dist/includes/dbcon.php');
                     <table id="example1" class="table table-bordered table-striped">
                       <tr>
                         <th colspan="6"></th>
-                        <th colspan="3">RECEIVED</th>
-                        <th colspan="2">DOA</th>
-                        <th colspan="2">DAA</th>
-                        <th colspan="2">Runts</th>
-                        <th>FIC</th>
-                        <th>SHOV</th>
+                        <th colspan="3" style="text-align: center;">RECEIVED</th>
+                        <th colspan="2" style="text-align: center;">DOA</th>
+                        <th colspan="2" style="text-align: center;">DAA</th>
+                        <th colspan="2" style="text-align: center;">Runts</th>
+                        <th style="text-align: center;">FIC</th>
+                        <th style="text-align: center;">SHOV</th>
                       </tr>
                       <tr>
                         <th>Growers</th>
@@ -141,17 +135,26 @@ include('../dist/includes/dbcon.php');
                         <th>Sh/(Ov)</th>
                       </tr>
 <?php
-    
-    $query=mysqli_query($con,"select * from grower natural join delivery where DATE_FORMAT(delivery_date,'%m/%d/%Y')='$date'")or die(mysqli_error($con));
+    $total_received=0;
+    $total_weight=0;
+    $alw=0;
+    $query=mysqli_query($con,"select * from grower natural join delivery where delivery_date='$date'")or die(mysqli_error($con));
           while($row=mysqli_fetch_array($query)){
-    
+            $total_received=$total_received+$row['pcshauled'];
+            $total_weight=$total_weight+$row['net_weight'];
+            $doa_pcs=$doa_pcs=$row['doa_pcs'];
+            $doa_weight=$doa_weight=$row['doa_weight'];
+            $daa_pcs=$daa_pcs=$row['doa_pcs'];
+            $daa_weight=$daa_weight=$row['doa_weight'];
+            $alw=$alw+$row['alw'];
+
 ?>                  <tr>
                        <td><?php echo $row['grower_name'];?></td> 
                        <td></td> 
                        <td><?php echo $row['plateno'];?></td> 
-                       <td><?php echo $row['timeinplant'];?></td> 
-                       <td><?php echo $row['timeweighed'];?></td> 
-                       <td><?php echo $row['time_hanged'];?></td>  
+                       <td><?php echo date("h:i A",strtotime($row['timeinplant']));?></td> 
+                       <td><?php echo date("h:i A",strtotime($row['timeweighed']));?></td> 
+                       <td><?php echo date("h:i A",strtotime($row['time_hanged']));?></td>  
                        <td><?php echo $row['pcshauled'];?></td> 
                        <td><?php echo $row['net_weight'];?></td> 
                        <td><?php echo $row['alw'];?></td> 
@@ -165,6 +168,20 @@ include('../dist/includes/dbcon.php');
                        <td></td>
                     </tr>  
 <?php }?>
+                    <tr>
+                       <td colspan="6">Grand Total</td> 
+                       <td><?php echo $total_received;?></td> 
+                       <td><?php echo $total_weight;?></td> 
+                       <td><?php echo $row['alw'];?></td> 
+                       <td><?php echo $doa_pcs;?></td> 
+                       <td><?php echo $doa_weight;?></td> 
+                       <td><?php echo $daa_pcs;?></td> 
+                       <td><?php echo $daa_weight;?></td> 
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                       <td></td>
+                    </tr>  
                   </table>       
                   <div style="float: right;margin-right: 200px;margin-top: 50px">
                        Prepared by: <br><br><br>
