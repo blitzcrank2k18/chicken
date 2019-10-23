@@ -110,14 +110,14 @@ $(function () {
                     </tr>
 <?php
     
-    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where year(delivery_date)='$year' group by date")or die(mysqli_error($con));
+    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,AVG(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where year(delivery_date)='$year' group by date")or die(mysqli_error($con));
           while($row=mysqli_fetch_array($query)){
     
 ?>                  <tr>
                        <td><?php echo $row['date'];?></td> 
                        <td><?php echo $row['birds'];?></td> 
                        <td><?php echo $row['net_weight'];?></td> 
-                       <td><?php echo $row['alw'];?></td> 
+                       <td><?php echo number_format($row['alw'],2);?></td> 
                        <td><?php echo $row['doa_pcs'];?></td> 
                        <td><?php echo $row['doa_weight'];?></td>  
                        <td><?php echo $row['daa_pcs'];?></td> 
