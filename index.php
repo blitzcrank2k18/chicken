@@ -30,7 +30,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="login-page">
+<body class="login-page" style="background-image: url('dist/img/bg.jpg');background-repeat: no-repeat;background-position: center;">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="login-box-body">

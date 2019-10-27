@@ -31,7 +31,7 @@ include('../dist/includes/dbcon.php');
 
 <div class="container">
   <br/><?php //include('../dist/includes/header_report.php');?>
-
+  <?php include('../dist/includes/header_report.php');?>
   <h3 style="text-align: center;">SMFI - Poultry Processing Plant <br>
     Production Output
    <input class="btn-print btn-primary" type="button" name="print" value="Print" onclick="window.print();window.location.href='sales_customer.php';">            </h3><br><br>
