@@ -57,7 +57,7 @@ include('../dist/includes/dbcon.php');
                   <hr>
                    
 <?php
-
+    $disc=0;
     $sales_id=$_REQUEST['sales_id'];
     $query=mysqli_query($con,"select * from sales natural join customer where sales_id='$sales_id'")or die(mysqli_error($con));
       
@@ -65,9 +65,11 @@ include('../dist/includes/dbcon.php');
         $sid=$row['sales_id'];
         $due=$row['amount_due'];
         $discount=$row['discount'];
-        $grandtotal=$due-$discount;
+        $percent=$row['percent'];
+       // $grandtotal=$due-($due*$disc);
         $tendered=$row['cash_tendered'];
         $change=$row['cash_change'];
+        echo $disc;
 ?>                      
                   <h3 class="pull-right">OR # <?php echo $row['sales_id'];?></h3>  
                   <table class="table" width="100%">
@@ -111,7 +113,7 @@ include('../dist/includes/dbcon.php');
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-right">Subtotal</td>
+                        <td class="text-right">Total</td>
                         <td style="text-align:right"><?php echo number_format($grand,2);?></td>
                       </tr>
                       <tr>
@@ -119,14 +121,14 @@ include('../dist/includes/dbcon.php');
                         <td></td>
                         <td></td>
                         <td class="text-right">Discount</td>
-                        <td style="text-align:right"><?php echo number_format($discount,2);?></td>
+                        <td style="text-align:right"><?php echo number_format($percent,2);?>%</td>
                       </tr>
                       <tr>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td class="text-right"><b>Grand Total</b></td>
-                        <td style="text-align:right"><b><?php echo number_format($grand-$discount,2);?></b></td>
+                        <td class="text-right"><b>Amount Due</b></td>
+                        <td style="text-align:right"><b><?php echo number_format($due,2);?></b></td>
                       </tr>
                       <tr>
                         <td></td>

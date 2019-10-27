@@ -7,7 +7,8 @@ function startCalc(){
 function calc(){
   one = document.autoSumForm.total.value;
   two = document.autoSumForm.discount.value; 
-  three = (one * 1) - (two * 1);
+  discount = (one * 1) * (two/100);
+  three = (one * 1) - (discount * 1);
   document.autoSumForm.amount_due.value = three.toFixed(2);
 
   four = document.autoSumForm.tendered.value; 

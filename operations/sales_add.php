@@ -2,22 +2,21 @@
 session_start();
 $id=$_SESSION['id'];	
 include('../dist/includes/dbcon.php');
-
 	$discount = $_POST['discount'];
-	$amount_due = $_POST['amount_due'];
-	$customer = $_POST['customer'];
 	
+	$customer = $_POST['customer'];
+	//$disc=$amount_due
 	date_default_timezone_set("Asia/Manila"); 
 	$date = date("Y-m-d H:i:s");
-	
-	$total=$amount_due-$discount;
-	
+	$amount_due = $_POST['amount_due'];
+	$total=$_POST['total'];
+	$disc = $total*($discount/100);
 
 		$tendered = $_POST['tendered'];
 		$change = $_POST['change'];
 
-		mysqli_query($con,"INSERT INTO sales(discount,amount_due,total,sales_date,cash_tendered,cash_change,cust_id) 
-	VALUES('$discount','$amount_due','$total','$date','$tendered','$change','$customer')")or die(mysqli_error($con));
+		mysqli_query($con,"INSERT INTO sales(discount,amount_due,total,sales_date,cash_tendered,cash_change,cust_id,percent) 
+	VALUES('$disc','$amount_due','$total','$date','$tendered','$change','$customer','$discount')")or die(mysqli_error($con));
 		
 	
 	

@@ -15,7 +15,7 @@ endif;
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include "../dist/includes/aside.php";?>
+  <?php include "../dist/includes/aside_operations.php";?>
   
   <!-- =============================================== -->
 
