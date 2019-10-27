@@ -48,6 +48,7 @@ endif;
             <div class="box-body">
             <table id = "example1" class = "table table-responsive table-bordered">
                 <thead>
+                  <th>RS #</th>
                   <th>Delivery Date</th>
                   <th>Grower</th>
                   <th>Time In Plant</th>
@@ -68,6 +69,7 @@ endif;
       ?>
         
                 <tr>
+                  <td><?php echo $row['delivery_id'];?></td>
                   <td><?php echo $row['delivery_date'];?></td>
                   <td><?php echo $row['grower_name'];?></td>
                   <td><?php echo $row['timeinplant'];?></td>

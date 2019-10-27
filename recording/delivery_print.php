@@ -53,7 +53,7 @@ endif;
             <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
-                  $query=mysqli_query($con,"select *,SUM(weight) as weight,SUM(coops) as coops from live_weight natural join delivery natural join grower where live_weight.delivery_id='$id' group by delivery_id")or die(mysqli_error());
+                  $query=mysqli_query($con,"select * from delivery natural join grower where delivery_id='$id' group by delivery_id")or die(mysqli_error($con));
                     $row=mysqli_fetch_array($query);
                 ?>            
               <table class="table table-striped">
@@ -131,52 +131,56 @@ endif;
               </table>
               <table class="table table-striped">
                   <?php
+                    $delivery_id=$row['delivery_id'];
                     // include('../dist/includes/dbcon.php');
-                      $query1=mysqli_query($con,"select * from loops where delivery_id='$id'")or die(mysqli_error($con));
-                        while($row1=mysqli_fetch_array($query1)){
+                      $queryl=mysqli_query($con,"select * from `loops` where delivery_id='$delivery_id'")or die(mysqli_error($con));
+                        $rowl=mysqli_fetch_array($queryl);
                   ?> 
                   <tr>
                     <td>COOPS TAKEN</td>
-                    <td><?php echo $row1['looptaken'];?></td>
+                    <td><?php echo $rowl['looptaken'];?></td>
                     <td>COOPS RETURN</td>
-                    <td><?php echo $row1['loopreturn'];?></td>
+                    <td><?php echo $rowl['loopreturn'];?></td>
                     <td>GROSS WEIGHT</td>
                     <td><?php echo $row['gross_weight'];?></td>
                     <td>TIMEIN IN (FARM)</td>
                     <td><?php echo $row['timeinfarm'];?></td>
                   </tr>
-                  <?php }?>
+               
                   <tr>
                     <td>TIME</td>
-                    <td><?php echo $row1['taketime'];?></td>
+                    <td><?php echo date("h:s a",strtotime($rowl['taketime']));?></td>
                     <td>TIME</td>
-                    <td><?php echo $row1['returntime'];?></td>
+                    <td><?php echo date("h:s a",strtotime($rowl['returntime']));?></td>
                     <td>COOPS WEIGHT</td>
-                    <td><?php echo $row1['coops_weight'];?></td>
+                    <td><?php echo number_format($rowl['coops_weight'],2);?></td>
                     <td>LOAD START</td>
-                    <td><?php echo $row1['loadstart'];?></td>
+                    <td><?php echo date("Y-m-d",strtotime($row['loadstart']));?></td>
                   </tr>
                   <tr>
                     <td>DATE</td>
-                    <td><?php echo $row1['takedate'];?></td>
+                    <td><?php echo date("Y-m-d",strtotime($rowl['takedate']));?></td>
                     <td>DATE</td>
-                    <td><?php echo $row1['returndate'];?></td>
+                    <td><?php echo date("Y-m-d",strtotime($rowl['returndate']));?></td>
                     <td>NET WEIGHT</td>
                     <td><?php echo $row['net_weight'];?></td>
                     <td>LOAD FINISHED</td>
-                    <td><?php echo $row1['loadfinish'];?></td>
+                    <td><?php echo date("Y-m-d",strtotime($row['loadfinish']));?></td>
                   </tr>
                   <tr>
                     <td>GUARD</td>
-                    <td><?php echo $row1['taketime'];?></td>
+                    <td><?php echo $rowl['takenguard'];?></td>
                     <td>GUARD</td>
-                    <td><?php echo $row1['returntime'];?></td>
+                    <td><?php echo $rowl['returnguard'];?></td>
                     <td>DOA PIECES</td>
-                    <td><?php echo $row1['doa_pcs'];?></td>
+                    <td><?php echo $row['doa_pcs'];?></td>
                     <td>HAULER/TRUCK PLATE NO.</td>
                     <td><?php echo $row['plateno'];?></td>
                   </tr>
-                  
+                  <tr>
+                    <td colspan="6"><br><br></td>
+                    <th>RS No. <span style="font-size: 22px;color: red"><?php echo $row['delivery_id'];?></span></th>
+                  </tr>
                 </tbody>
               </table>
               </form>
