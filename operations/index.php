@@ -83,32 +83,7 @@ $(function () {
     
         
                     <div id="container1"></div>
-                    <table id="example1" class="table table-bordered table-striped">
-                   
-<?php
-
-    
-    $query=mysqli_query($con,"SELECT SUM(amount_due) as total,DATE_FORMAT(sales_date,'%Y/%m/%d') as date FROM `sales` where DATE_FORMAT(sales_date,'%Y/%m')='$year' group by date")or die(mysqli_error($con));
-
-    while($row=mysqli_fetch_array($query)){
-    
-?>                  <tr>
-                       <td><?php echo $row['date'];?></td> 
-                       <td><?php echo $row['total'];?></td> 
-                    </tr>  
-<?php }?>
-<?php
-    
-    $query=mysqli_query($con,"SELECT SUM(amount_due) as total FROM `sales` where DATE_FORMAT(sales_date,'%Y')='2019'")or die(mysqli_error($con));
-
-      $row=mysqli_fetch_array($query);
-    
-?>
-                    <tr>
-                       <th>TOTAL SALES</th> 
-                       <th><?php echo $row['total'];?></th> 
-                    </tr>             
-                  </table>       
+                         
                 </div>
             </div>
         </div>

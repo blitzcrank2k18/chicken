@@ -88,13 +88,15 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody><tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Grower Name</th>
                   <th>Contact #</th>
                   <th>Address</th>
                   <th>Action</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
        include('../dist/includes/dbcon.php');
         $query=mysqli_query($con,"select * from grower order by grower_name")or die(mysqli_error());

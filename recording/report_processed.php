@@ -44,6 +44,7 @@ include('../dist/includes/dbcon.php');
                        include('../dist/includes/dbcon.php');
                         $query1=mysqli_query($con,"select *,SUM(pcshauled) as received,SUM(net_weight) as net_weight,SUM(doa_pcs) as doa_pcs,SUM(daa_pcs) as daa_pcs,AVG(alw) as average,MIN(alw) as min,MAX(alw) as max from delivery where delivery_date='$date' group by delivery_date")or die(mysqli_error($con));
                           $row1=mysqli_fetch_array($query1);
+                          $id=$row1['delivery_id'];
                           ?>
 
                 <div class="panel-body">
@@ -64,10 +65,13 @@ include('../dist/includes/dbcon.php');
                         <th><?php echo $row1['doa_pcs'];?></th>
                         <th><?php echo number_format($row1['doa_pcs']/$row1['received']*100,2);?>%</th>
                       </tr>
+                      <?php $query2=mysqli_query($con,"select *,SUM(process_weight) as weight,SUM(qty) as process_qty from process where delivery_id='$id' group by delivery_id")or die(mysqli_error($con));
+                          $row2=mysqli_fetch_array($query2);
+                      ?>
                       <tr>
                         <th>Volume Processed</th>
-                        <th><?php echo $row1['received']-$row1['doa_pcs']-$row1['daa_pcs'];?></th>
-                        <th><?php echo number_format($row1['net_weight']-$row1['doa_weight']-$row1['daa_weight'],2);?></th>
+                        <th><?php echo number_format($row2['process_qty'],2);?></th>
+                        <th><?php echo number_format($row2['process_weight'],2);?></th>
                         <th>DAA</th>
                         <th><?php echo $row1['daa_pcs'];?></th>
                         <th><?php echo number_format($row1['daa_pcs']/$row1['received']*100,2);?>%</th>

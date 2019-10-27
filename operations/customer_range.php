@@ -7,7 +7,7 @@ endif;
 <?php
 include('../dist/includes/dbcon.php');
   $date=$_POST['date'];
-  //    $start=date("Y/m/d",strtotime($date[0]));
+  $date=date("Y-m-d",strtotime($date));
 
 ?>
 
@@ -43,40 +43,45 @@ include('../dist/includes/dbcon.php');
                     <div id="container"></div>
                     <table id="example1" class="table table-bordered table-striped">
                     <tr>
-                      <th colspan="5"><?php echo $_POST['date'];?></th>
+                      <th colspan="6"><?php echo date("m/d/Y l",strtotime($date));?></th>
                       <th>Printed: <br><?php echo date("m/d/Y");?></th>
                     </tr>
                     <tr>
                       <th>Code</th>
                       <th>Products</th>
+                      <th>Customer</th>
                       <th>Crates</th>
                       <th>Pieces</th>
                       <th>Weight</th>
                       <th>% Output</th>
                     </tr>
 <?php
-    $queryall=mysqli_query($con,"select SUM(sales_kg) as total_weight, SUM(sales_qty) as total_qty from sales natural join sales_details natural join product where DATE_FORMAT(sales_date,'%m/%d/%Y') ='$date' group by DATE_FORMAT(sales_date,'%m/%d/%Y')")or die(mysqli_error($con));
-          $rowall=mysqli_fetch_array($queryall);
-            $total_weight=$rowall['total_weight'];
-            $total_qty=$rowall['total_qty'];
+    $qty=0;
+    $total_weight=0;
+    $query1=mysqli_query($con,"select *,SUM(sales_qty) as total_qty,date(sales_date) as date from sales natural join sales_details natural join product where date(sales_date)='$date'")or die(mysqli_error($con));
+          $row1=mysqli_fetch_array($query1);
+            $total=$row1['total_qty'];
 
-    $query=mysqli_query($con,"select * from sales natural join sales_details natural join product where DATE_FORMAT(sales_date,'%m/%d/%Y') ='$date'")or die(mysqli_error($con));
+    $query=mysqli_query($con,"select * from sales natural join sales_details natural join product natural join customer where date(sales_date)='$date'")or die(mysqli_error($con));
           while($row=mysqli_fetch_array($query)){
+            $qty=$qty+$row['sales_qty'];
+            $total_weight=$total_weight+$row['sales_kg'];
             
-    
 ?>                  <tr>
                        <td><?php echo $row['prod_code'];?></td> 
                        <td><?php echo $row['prod_desc'];?></td> 
+                       <td><?php echo $row['cust_name'];?></td> 
                        <td>0</td> 
                        <td><?php echo $row['sales_qty'];?></td> 
                        <td><?php echo $row['sales_kg'];?></td> 
-                       <td><?php echo number_format($row['sales_kg']/$total_weight*100,2);?>%</td>  
+                       <td><?php echo number_format($row['sales_qty']/$total*100,2);?>%</td>  
                     </tr>  
 <?php }?>
                     <tr>
                        <th colspan="3">Grand Total</th> 
-                       <th><?php echo $total_qty;?></th>  
-                       <th><?php echo $total_weight;?></th>  
+                       <th>0</th>  
+                       <th><?php echo $qty;?></th>  
+                       <th><?php echo number_format($total_weight,2);?></th>  
                        <th><?php echo "100.00%";?></th>  
                     </tr>  
                   </table><br><br>

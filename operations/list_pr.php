@@ -45,14 +45,16 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody><tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Customer Name</th>
                   <th>Contact</th>
                   <th>Address</th>
                   <th>PR Date</th>
                   <th>Status</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
        include('../dist/includes/dbcon.php');
         $query=mysqli_query($con,"select * from pr natural join customer order by pr_date DESC")or die(mysqli_error());

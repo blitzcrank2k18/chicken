@@ -82,33 +82,7 @@ $(function () {
     
         
                     <div id="container1"></div>
-                    <table id="example1" class="table table-bordered table-striped">
-                   
-<?php
-
-    //$total=0;
-
-    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m/%d') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where DATE_FORMAT(delivery_date,'%Y/%m')='$year' group by date")or die(mysqli_error($con));
-
-    while($row=mysqli_fetch_array($query)){
-    
-?>                  <tr>
-                       <td><?php echo $row['date'];?></td> 
-                       <td><?php echo $row['birds'];?></td> 
-                    </tr>  
-<?php }?>
-<?php
-    
-    $query=mysqli_query($con,"select DATE_FORMAT(delivery_date,'%Y/%m/%d') as date,SUM(pcshauled) as birds,SUM(net_weight) as net_weight,SUM(alw) as alw,SUM(doa_pcs) as doa_pcs,SUM(doa_weight) as doa_weight,SUM(daa_pcs) as daa_pcs,SUM(daa_weight) as daa_weight from delivery where DATE_FORMAT(delivery_date,'%Y/%m')='$year' group by DATE_FORMAT(delivery_date,'%Y/%m')")or die(mysqli_error($con));
-
-      $row=mysqli_fetch_array($query);
-    
-?>
-                    <tr>
-                       <th>TOTAL INVENTORY</th> 
-                       <th><?php echo $row['birds'];?></th> 
-                    </tr>             
-                  </table>       
+                        
                 </div>
             </div>
         </div>

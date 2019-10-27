@@ -15,13 +15,13 @@
                 <tr>
                   <th>Time Taken</th>
                   <th>Time Returned</th>
-                  <th>Coops Weight</th>
+                  
                   <th>Load Start</th>
                 </tr>
                 <tr>
                   <td><input type="time" class="form-control" id="name" name="time_taken"></td>
                   <td><input type="time" class="form-control" id="name" name="time_return"></td>
-                  <td><input type="text" class="form-control" id="name" name="coops_weight"></td>
+                  
                   <td><input type="time" class="form-control" id="name" name="load_start"></td>
                 </tr>
                 <tr>

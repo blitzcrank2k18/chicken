@@ -24,12 +24,11 @@ endif;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Live Weight
+        Processed
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Live Weight</a></li>
-        <li class="active">Add New</li>
+        <li><a href="#">Processed</a></li>
       </ol>
     </section>
 
@@ -74,7 +73,7 @@ endif;
                   <th>Product Code</th>
                   <th>Description</th>
                   <th>Qty</th>
-                  <th>Price</th>
+                  <th>Weight</th>
                 </tr>
                 <?php
                  include('../dist/includes/dbcon.php');
@@ -90,7 +89,7 @@ endif;
                   <td><?php echo $row['prod_code'];?></td>
                   <td><?php echo $row['prod_desc'];?></td>
                   <td><input type="number" class="form-control" id="name" name="qty[]"></td>
-                  <td><?php echo $row['prod_price'];?></td>
+                  <td><input type="text" class="form-control" id="name" name="weight[]"></td>
                 </tr>
                 
           <?php $i++;}?>          
@@ -114,18 +113,19 @@ endif;
                   <th>Product Code</th>
                   <th>Description</th>
                   <th>Qty</th>
-                  <th>Price</th>
+                  <th>Weight</th>
                 </tr>
                 <?php
                  include('../dist/includes/dbcon.php');
                  $id=$_REQUEST['id'];
+                 $weight=0;
                   $query=mysqli_query($con,"select * from process natural join product where delivery_id='$id'")or die(mysqli_error());
                     $i=1;
                     $total=0;
                     $amount=0;
                     while($row=mysqli_fetch_array($query)){
                       $total=$total+$row['qty'];
-                      $amount=$amount+($row['qty']*$row['prod_price']);
+                      $weight=$weight+$row['process_weight'];
                 ?>
         
                 <tr>
@@ -134,14 +134,14 @@ endif;
                   <td><?php echo $row['prod_code'];?></td>
                   <td><?php echo $row['prod_desc'];?></td>
                   <td><?php echo $row['qty'];?></td>
-                  <td><?php echo $row['prod_price'];?></td>
+                  <td><?php echo $row['process_weight'];?></td>
                 </tr>
                 
           <?php $i++;}?>          
                 <tr>
                   <th colspan="2" style="">TOTAL</th>
                   <th colspan="" style=""><?php echo $total;?></th>
-                  <th>P<?php echo number_format($amount,2);?></th>
+                  <th><?php echo number_format($weight,2);?></th>
                 </tr>
               </tbody>
             </table>
@@ -178,7 +178,7 @@ endif;
                   </tr>
                   <tr>
                     <td>Gross Weight (kg)</td>
-                    <td colspan="2"><?php echo $row['weight'];?></td>
+                    <td colspan="2"><?php echo $row['gross_weight'];?></td>
                   </tr>
                   <tr>
                     <th colspan="3">Coops Tare Weight (kg)</th>
@@ -201,7 +201,7 @@ endif;
                   <?php }?>
                   <tr>
                     <td>Net Weight (kg)</td>
-                    <td colspan="2"><?php echo $row['weight'];?></td>
+                    <td colspan="2"><?php echo $row['net_weight'];?></td>
                   </tr>
                   <tr>
                     <td>ALW</td>

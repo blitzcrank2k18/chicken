@@ -1,15 +1,12 @@
 <?php 
 session_start();
-$branch=$_SESSION['branch'];
+//$branch=$_SESSION['branch'];
 include('../dist/includes/dbcon.php');
 
 	$name = $_POST['prod_code'];
 	$desc = $_POST['desc'];
 	$price = $_POST['price'];
-	$reorder = $_POST['reorder'];
-	$category = $_POST['category'];
-	$image = $_POST['image'];
-     $desc = $_POST['desc'];
+    $desc = $_POST['desc'];
 
 	$query2=mysqli_query($con,"select * from product where prod_code='$name'")or die(mysqli_error($con));
 		$count=mysqli_num_rows($query2);

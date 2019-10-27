@@ -15,7 +15,7 @@ endif;
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include "../dist/includes/aside_operations.php";?>
+  <?php include "../dist/includes/aside.php";?>
   
   <!-- =============================================== -->
 
@@ -64,7 +64,7 @@ endif;
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-danger pull-right">Print</button>
+                  <button type="submit" class="btn btn-danger pull-right">View</button>
                 </div>
                 <!-- /.box-footer -->
               </form>

@@ -266,7 +266,7 @@ endif;
                   </tr>
                   <tr>
                     <td colspan="2">Gross Weight (kg)</td>
-                    <td colspan=""><?php echo $row['weight'];?></td>
+                    <td colspan=""><?php echo $row['gross_weight'];?></td>
                   </tr>
                   <tr>
                     <th colspan="3">Coops Tare Weight (kg)</th>

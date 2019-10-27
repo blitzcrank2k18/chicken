@@ -21,13 +21,13 @@
                 <tr>
                   <th>Time Taken</th>
                   <th>Time Returned</th>
-                  <th>Coops Weight</th>
+                  <th></th>
                   <th>Load Start</th>
                 </tr>
                 <tr>
                   <td><input type="time" class="form-control" id="name" name="time_taken" value="<?php echo $rowc['taketime'];?>"></td>
                   <td><input type="time" class="form-control" id="name" name="time_return" value="<?php echo $rowc['returntime'];?>"></td>
-                  <td><input type="text" class="form-control" id="name" name="coops_weight" value="<?php echo $rowc['coops_weight'];?>"></td>
+                  <td></td>
                   <td><input type="time" class="form-control" id="name" name="load_start" value="<?php echo $row['loadstart'];?>"></td>
                 </tr>
                 <tr>

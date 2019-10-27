@@ -45,8 +45,9 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody><tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Delivery Date</th>
                   <th>Grower</th>
                   <th>Time In Plant</th>
@@ -58,7 +59,8 @@ endif;
                   <th>Net Weight</th>
                   <th>Driver</th>
                   <th>Status</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
        include('../dist/includes/dbcon.php');
         $query=mysqli_query($con,"select * from delivery natural join grower order by delivery_date DESC")or die(mysqli_error());
@@ -80,8 +82,9 @@ endif;
                 </tr>
                 
       <?php }?>          
-              </tbody></table>
-              </form>
+              </tbody>
+            </table>
+          </form>
           </div>
         </div>
       <!-- /.box -->

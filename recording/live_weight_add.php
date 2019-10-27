@@ -8,7 +8,7 @@ include('../dist/includes/dbcon.php');
 	
 	mysqli_query($con,"INSERT INTO live_weight (weight,coops,delivery_id) VALUES('$weight','2','$id')")or die(mysqli_error($con));
             
-   	echo "<script type='text/javascript'>alert('Successfully added new live weight!');</script>";
+   	//echo "<script type='text/javascript'>alert('Successfully added new live weight!');</script>";
 	echo "<script>document.location='live_weight.php?id=$id'</script>";  
 	
 ?>

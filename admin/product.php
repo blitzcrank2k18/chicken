@@ -50,19 +50,19 @@ endif;
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Product Code</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Product Code" name="prod_code">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Product Code" name="prod_code" required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Product Description</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputEmail3" placeholder="Product Desciption" name="desc"></textarea>
+                      <textarea class="form-control" id="inputEmail3" placeholder="Product Desciption" name="desc" required></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Product Price</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputEmail3" placeholder="Product Price" name="price">
+                      <input type="text" class="form-control" id="inputEmail3" placeholder="Product Price" name="price" required>
                     </div>
                   </div>
                   </div>
@@ -87,13 +87,15 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody><tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Product Code</th>
                   <th>Description</th>
                   <th>Price</th>
                   <th>Action</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
        include('../dist/includes/dbcon.php');
         $query=mysqli_query($con,"select * from product order by prod_code")or die(mysqli_error());

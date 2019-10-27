@@ -63,6 +63,9 @@ endif;
               <li>
                   <a href="delivery_print.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-warning"> <i class="fa fa-print"></i> Print Delivery Details</a>
               </li>
+              <li>
+                  <a href="processed_print.php?id=<?php echo $_REQUEST['id'];?>" class="btn btn-primary"> <i class="fa fa-print"></i> Print Processing Details</a>
+              </li>
             </ul>
             
             <input type="hidden" name="id" value="<?php echo $id;?>">

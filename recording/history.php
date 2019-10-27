@@ -44,11 +44,12 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody>
-                <tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Log</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
        include('../dist/includes/dbcon.php');
         $query=mysqli_query($con,"select * from history_log natural join user order by date DESC")or die(mysqli_error());

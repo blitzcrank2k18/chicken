@@ -32,7 +32,7 @@ include('../dist/includes/dbcon.php');
 	$gross = $_POST['gross'];
 	$time_taken = $_POST['time_taken'];
 	$time_return = $_POST['time_return'];
-	$coops_weight = $_POST['coops_weight'];
+	//$coops_weight = $_POST['coops_weight'];
 	$date_taken = $_POST['date_taken'];
 	$date_return = $_POST['date_return'];
 	$net_weight = $_POST['net_weight'];

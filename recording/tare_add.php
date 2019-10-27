@@ -19,11 +19,13 @@ include('../dist/includes/dbcon.php');
 		$tare_total=$tare_weight[$i]*$tare_pc[$i];
 		mysqli_query($con,"UPDATE tare SET tare_weight='$tare_weight[$i]',tare_pc='$tare_pc[$i]',tare_total='$tare_total' where tare_id='$value'")
 	 or die(mysqli_error($con)); 
+
+	 	$tare=$tare+$tare_total;
 	 	$i++;
 
 	}
 
-			mysqli_query($con,"update delivery set doa_pcs='$doa_pc',doa_weight='$doa_wt',daa_pcs='$daa_pc',daa_weight='$daa_wt' where delivery_id='$id'")or die(mysqli_error($con));
+			mysqli_query($con,"update delivery set doa_pcs='$doa_pc',doa_weight='$doa_wt',daa_pcs='$daa_pc',daa_weight='$daa_wt',tare='$tare',net_weight=gross_weight-'$tare' where delivery_id='$id'")or die(mysqli_error($con));
 	
 
 			echo "<script type='text/javascript'>alert('Successfully added new tare weight!');</script>";

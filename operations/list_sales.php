@@ -45,8 +45,9 @@ endif;
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <table class="table table-striped">
-                <tbody><tr>
+            <div class="box-body">
+            <table id = "example1" class = "table table-responsive table-bordered">
+                <thead>
                   <th>Sales ID</th>
                   <th>Sales Date</th>
                   <th>Customer Name</th>
@@ -54,7 +55,8 @@ endif;
                   <th>Cash Tendered</th>
                   <th>Change</th>
                   <th>View</th>
-                </tr>
+                </thead>
+                <tbody>
       <?php
           include('../dist/includes/dbcon.php');
           $query=mysqli_query($con,"select * from sales natural join customer order by sales_date desc")or die(mysqli_error($con));
