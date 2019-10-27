@@ -14,6 +14,7 @@ include('../dist/includes/dbcon.php');
 	$load_finish = $_POST['load_finish'];
 	$timein = $_POST['timein'];
 	$driver = $_POST['driver'];
+	$time_hanged = $_POST['time_hanged'];
 
 	$pcshauled = $_POST['pcshauled'];
 	$grower = $_POST['grower'];
@@ -44,8 +45,8 @@ include('../dist/includes/dbcon.php');
 	$reason = $_POST['reason'];
 	$status = $_POST['status'];
 
-			mysqli_query($con,"INSERT INTO delivery(truck_seal,tripno,noofcrew,plateno,delivery_date,timeoutfarm,timeinfarm,loadstart,loadfinish,timeinplant,pcshauled,houseno,farmchecker,datefeed,timefeed,timeweighed,alw,delivery_weigher,birdspercoop,coopswocover,grower_id,doa_weight,doa_pcs,net_weight,gross_weight,driver,destination,birdstatus,reason)
-			VALUES('$seal','$trips','$crew','$plateno','$date','$timeout_farm','$timein_farm','$load_start','$load_finish','$timein','$pcshauled','$houseno','$farm_checker','$datefeed','$timefeed','$time_weighed','$alw','$weigher','$birdspercoop','$coopswocover','$grower','$doa_weight','$doa_pcs','$net_weight','$gross','$driver','$destination','$status','$reason')")or die(mysqli_error($con));
+			mysqli_query($con,"INSERT INTO delivery(truck_seal,tripno,noofcrew,plateno,delivery_date,timeoutfarm,timeinfarm,loadstart,loadfinish,timeinplant,pcshauled,houseno,farmchecker,datefeed,timefeed,timeweighed,alw,delivery_weigher,birdspercoop,coopswocover,grower_id,doa_weight,doa_pcs,net_weight,gross_weight,driver,destination,birdstatus,reason,time_hanged)
+			VALUES('$seal','$trips','$crew','$plateno','$date','$timeout_farm','$timein_farm','$load_start','$load_finish','$timein','$pcshauled','$houseno','$farm_checker','$datefeed','$timefeed','$time_weighed','$alw','$weigher','$birdspercoop','$coopswocover','$grower','$doa_weight','$doa_pcs','$net_weight','$gross','$driver','$destination','$status','$reason','$time_hanged')")or die(mysqli_error($con));
 
 			$id=mysqli_insert_id($con);	        
 

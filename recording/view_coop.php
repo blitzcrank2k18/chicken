@@ -21,13 +21,13 @@
                 <tr>
                   <th>Time Taken</th>
                   <th>Time Returned</th>
-                  <th></th>
+                  <th>Time Hanged</th>
                   <th>Load Start</th>
                 </tr>
                 <tr>
                   <td><input type="time" class="form-control" id="name" name="time_taken" value="<?php echo $rowc['taketime'];?>"></td>
                   <td><input type="time" class="form-control" id="name" name="time_return" value="<?php echo $rowc['returntime'];?>"></td>
-                  <td></td>
+                  <td><input type="time" class="form-control" id="name" name="time_hanged" value="<?php echo $rowc['time_hanged'];?>"></td>
                   <td><input type="time" class="form-control" id="name" name="load_start" value="<?php echo $row['loadstart'];?>"></td>
                 </tr>
                 <tr>
