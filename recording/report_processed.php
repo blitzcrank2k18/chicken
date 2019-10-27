@@ -176,7 +176,7 @@ include('../dist/includes/dbcon.php');
             
 ?>                  <tr>
                        <td></td> 
-                       <td></td> 
+                       <td><?php echo $row['delivery_id'];?></td> 
                        <td><?php echo $row['plateno'];?></td> 
                        <td><?php echo date("h:i A",strtotime($row['timeinplant']));?></td> 
                        <td><?php echo date("h:i A",strtotime($row['timeweighed']));?></td> 
